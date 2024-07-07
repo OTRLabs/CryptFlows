@@ -1,15 +1,8 @@
 from __future__ import annotations
 
-from cryptflows.app import create_workflows_app
+from cryptflows.app import create_workflows_app, initialize_application_services
 #from litestar import Litestar
-
-workflows_app = create_workflows_app()
-
-#app = Litestar()
-
-def main():
-    workflows_app.run()
-
-
+# Uncomment the following lines if this script is to be run directly
 if __name__ == "__main__":
-    main()
+    initialize_application_services()
+    create_workflows_app("example_scope")
