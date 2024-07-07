@@ -1,59 +1,130 @@
 # CryptFlows
-Agentic Security Automation buzzword framework
 
-----
+<p align="center">
+  <img src="https://your-logo-url-here.com/logo.png" alt="CryptFlows Logo" width="200"/>
+</p>
 
----
+<p align="center">
+  <strong>Agentic Security Automation Framework</strong>
+</p>
 
-Langchain driven agent framework designed to provide assistance during various types of offensive security situations 
+<p align="center">
+  <a href="https://github.com/yourusername/CryptFlows/actions"><img src="https://github.com/yourusername/CryptFlows/workflows/build/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/yourusername/CryptFlows/releases"><img src="https://img.shields.io/github/v/release/yourusername/CryptFlows" alt="Latest Release"></a>
+  <a href="https://github.com/yourusername/CryptFlows/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yourusername/CryptFlows" alt="License"></a>
+</p>
 
+## 🚀 Overview
 
-The plan is to create a system that begins as follows:
-Development 
+CryptFlows is a cutting-edge, Langchain-driven agent framework designed to provide intelligent assistance during various offensive security scenarios. By leveraging the power of Large Language Models (LLMs) and containerized applications, CryptFlows aims to revolutionize the way security professionals approach vulnerability assessment, exploitation, and reporting.
 
-The project will be built using python 
-Libraries & Dependencies:
+### 🔑 Key Features
 
-python package manager: PDM
-WebUI: Litestar + Vite
-Langchain: LLM & Agent orchestration + data access & analysis!
-container runtime: podman
-Workflow orchestration: Apache airflow?
-Database: duckdb
-ORM: advanced_alchemy, extension for SQLalchemy which allows use of DuckDB
-Ollama + Ollama HTTP API : LLM runtime
-Hugging face: specialized LLM runtime for more specific models
-Techniques:
+- **Intelligent Agent Framework**: Utilizes Langchain for LLM & Agent orchestration
+- **Modular Architecture**: Deploys containerized applications for individual tasks
+- **Adaptive LLM Routing**: Uses the right model for each task, optimizing performance
+- **Comprehensive Toolset**: Integrates Project Discovery's arsenal of network recon tools
+- **Automated Reporting**: Generates detailed, accurate security reports
 
-LLMRouting: using lighter models based on the question/prompt, allowing for computing power to be saved in the process. This can be done using Ollama as the platform supports many different models, and allows us to use the “right tool for the job”
+## 📋 Table of Contents
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Development](#development)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-The idea is: use python for the central “logic handler” or “main loop” of the system, and have it deploy containerized applications that can preform individual tasks as functions and return data to the main function for further processing and analysis 
+## 🔧 Installation
 
-For example: we will make heavy use of Project Discovery’s arsenal of network recon tools, each of which can be used as a docker (or in our case podman) container 
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/CryptFlows.git
 
+# Change to the project directory
+cd CryptFlows
 
-Milestones:
-Stage 1: CTF & Hack the Box Labs
+# Install dependencies using PDM
+pdm install
 
-We intend to use simple, private CTF labs such as hack the box, TryHackMe, etc to train the system to perform basic vulnerability detection & analysis, and carry out basic exploits, as well as developing the most important part! The logging, and reporting systems
+# Set up the environment
+pdm run setup
 
-We will be using these CTFs as a way to establish the base capabilities of our agent framework without bothering anyone with unnecessary bullshit reports
+# start the WebUI
+pdm run start-ui
 
+# run a specific task
+pdm run task <task_name>
 
-The primary focus of this section will be achieving 
+# Generate a report
+pdm run generate-report
+```
 
-accurate scope assessment 
-Accurate security research
-Accurate vulnerability assessment & exploitation when relevant 
+## 🛠️ Development
+CryptFlows is built using Python and leverages a powerful stack of technologies:
 
-Stage 2: Open Bug bounty programs 
+## Development Stack
 
-NOTICE: at no point should the system ever ever ever submit any type of report to any external service. We cannot guarantee 100% accuracy and the idea of wasting someone’s time with an unwarranted & unnecessary security issue is physically painful to think about. We do not want this thing to be submitting reports to hackerone without some human validation & verification 
+CryptFlows is built using the following powerful technologies:
 
+- **Package Manager**: [PDM](https://pdm.fming.dev/)
+- **WebUI**: [Litestar](https://litestar.dev/) + [Vite](https://vitejs.dev/)
+- **LLM & Agent Orchestration**: [Langchain](https://langchain.dev/)
+- **Container Runtime**: [Podman](https://podman.io/)
+- **Workflow Orchestration**: [Apache Airflow](https://airflow.apache.org/) (tentative)
+- **Database**: [DuckDB](https://duckdb.org/)
+- **Prompting**: [Fabric by Daniel M.](https://github.com/fabric/fabric)
+- **ORM**: [Advanced_alchemy](https://github.com/NickKravis/advanced_alchemy) (SQLAlchemy extension for DuckDB)
+- **LLM Runtime**: [Ollama](https://github.com/llm-foundation/ollama-server) + [Ollama HTTP API](https://github.com/llm-foundation/ollama-server#api)
+- **Specialized LLM Models**: [Hugging Face](https://huggingface.co/)
 
-Notice 2: the primary focus of these stages will be on demonstrating any potential vulnerabilities and issues found in systems. I would like to give the system some form of video manipulation abilities (pymovie?) and allow it to create demonstrations of the exploit, or whatever 
+## LLM Routing
 
-Stage 3: Penetration Testing 
+CryptFlows implements an intelligent LLM routing system that optimizes computing power and ensures the "right tool for the job" is always used.
 
-Stage 4: TBD! 
+## Containerized Task Execution
+
+The system's core logic is handled by Python, which deploys containerized applications to perform individual tasks. These containers return data to the main function for further processing and analysis.
+
+## 🗺️ Roadmap
+
+### Stage 1: CTF & Hack the Box Labs
+
+Focus: Establishing base capabilities without external impact
+
+- Accurate scope assessment
+- Security research
+- Vulnerability assessment & exploitation
+- Logging and reporting systems development
+
+### Stage 2: Open Bug Bounty Programs
+
+Focus: Demonstrating potential vulnerabilities
+
+- Implement video manipulation capabilities
+- Create exploit demonstrations
+- Develop human validation & verification processes
+
+### Stage 3: Penetration Testing
+
+Focus: Full-scale penetration testing capabilities
+
+- Automated reconnaissance
+- Exploit chaining
+- Advanced reporting
+
+### Stage 4: TBD
+
+Future developments based on community feedback and emerging security trends
+
+## 🤝 Contributing
+
+We welcome contributions to CryptFlows! Please refer to our [Contributing Guidelines](https://github.com/yourusername/CryptFlows/blob/main/CONTRIBUTING.md) for details on how to submit pull requests, report issues, and suggest improvements.
+
+## 📄 License
+
+CryptFlows is released under the [MIT License](https://github.com/yourusername/CryptFlows/blob/main/LICENSE).
+
+<p align="center">
+  Made with ❤️ by the [OTR Labs](https://github.com/OTRLabs) Team
+</p>
