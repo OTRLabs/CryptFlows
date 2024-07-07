@@ -7,6 +7,13 @@ import ollama
 
 
 def init_ollama():
+    """
+    This function initializes the ollama http server.
+    It creates a new server instance if the server is not already running.
+    The server is initialized with a port and an endpoint.
+    The function also starts the server.
+    """
+    # TODO: Implement the code for initializing the ollama http server
     pass
 
 
