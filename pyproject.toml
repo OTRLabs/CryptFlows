@@ -5,7 +5,9 @@ description = "Agent framework for pen testers"
 authors = [
     {name = "cam", email = "cammclain@skiff.com"},
 ]
-dependencies = []
+dependencies = [
+    "litestar>=2.9.1",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "apache-2.0"}
