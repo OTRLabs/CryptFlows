@@ -1,8 +1,9 @@
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-import os
+
 
 
 class Config:
@@ -15,3 +16,8 @@ class Config:
     DUCKDB_PORT=os.getenv("DUCKDB_PORT")
     DUCKDB_USERNAME=os.getenv("DUCKDB_USERNAME")
     DUCKDB_PASSWORD=os.getenv("DUCKDB_PASSWORD")
+    
+    RABBITMQ_HOST=os.getenv("RABBITMQ_HOST")
+    RABBITMQ_PORT=os.getenv("RABBITMQ_PORT")
+    RABBITMQ_USER=os.getenv("RABBITMQ_USER")
+    RABBITMQ_PASSWORD=os.getenv("RABBITMQ_PASSWORD")
