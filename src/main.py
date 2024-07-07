@@ -1,6 +1,8 @@
-from cryptflows.app import create_app
+from __future__ import annotations
 
-app = create_app()
+from cryptflows.app import create_workflows_app
+#from litestar import Litestar
 
-if __name__ == "__main__":
-    app.run()
+workflows_app = create_workflows_app()
+
+#app = Litestar()
