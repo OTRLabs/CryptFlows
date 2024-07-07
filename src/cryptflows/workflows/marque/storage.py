@@ -6,8 +6,8 @@ import typing as t
 import orjson
 import polars as pl
 
-from marque.scope import Scope
-from marque.util import json_deserialize, json_serialize
+from .scope import Scope
+from .util import json_deserialize, json_serialize
 
 
 class Storage(abc.ABC):
