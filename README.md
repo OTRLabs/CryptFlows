@@ -1,18 +1,10 @@
 # CryptFlows
 
-<p align="center">
-  <img src="https://your-logo-url-here.com/logo.png" alt="CryptFlows Logo" width="200"/>
-</p>
 
 <p align="center">
   <strong>Agentic Security Automation Framework</strong>
 </p>
 
-<p align="center">
-  <a href="https://github.com/yourusername/CryptFlows/actions"><img src="https://github.com/yourusername/CryptFlows/workflows/build/badge.svg" alt="Build Status"></a>
-  <a href="https://github.com/yourusername/CryptFlows/releases"><img src="https://img.shields.io/github/v/release/yourusername/CryptFlows" alt="Latest Release"></a>
-  <a href="https://github.com/yourusername/CryptFlows/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yourusername/CryptFlows" alt="License"></a>
-</p>
 
 ## 🚀 Overview
 
