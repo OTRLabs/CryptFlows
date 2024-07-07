@@ -70,36 +70,46 @@ def run(scope: str):
     click.echo(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
 
-def repl():
+def repl() -> None:
+    """
+    This function is the main entry point of the REPL (Read-Eval-Print Loop) application. It provides a command-line interface for users to interact with the CryptFlows framework.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
+    console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
     console.print("[bold green]Cryptflows REPL[/bold green]")
 
     while True:
-            command = Prompt.ask("[bold blue]>>>[/bold blue]").strip().lower()
+        command: str = Prompt.ask("[bold blue]>>>[/bold blue]").strip().lower()
 
-            if command == "exit":
-                console.print("[bold red]Exiting REPL...[/bold red]")
-                break
-            elif command == "help":
-                console.print("[bold yellow]Available commands:[/bold yellow]")
-                console.print("  run - Run analysis on a scope")
-                console.print("  scope - Enter the path to the scope directory")
-                console.print("  projects - List all projects in the database")
-                console.print("  help - Show this help message")
-                console.print("  exit - Exit the REPL")
-            elif command == "run":
-                scope = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
-                run(scope=scope)
+        if command == "exit":
+            console.print("[bold red]Exiting REPL...[/bold red]")
+            break
+        elif command == "help":
+            console.print("[bold yellow]Available commands:[/bold yellow]")
+            console.print("  run - Run analysis on a scope")
+            console.print("  scope - Enter the path to the scope directory")
+            console.print("  projects - List all projects in the database")
+            console.print("  help - Show this help message")
+            console.print("  exit - Exit the REPL")
+        elif command == "run":
+            scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+            run(scope=scope)
+        
+        elif command == "scope":
+            scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+            scope_csv_to_working_memory(scope=scope)
+
+        elif command == "projects":
+            console.print("[bold yellow]All projects in the database:[/bold yellow]")
+            console.print("IMPLEMENT ME")
             
-            elif command == "scope":
-                scope = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
-                scope_csv_to_working_memory(scope=scope)
-
-            elif command == "projects":
-                console.print("[bold yellow]All projects in the database:[/bold yellow]")
-                console.print("IMPLEMENT ME")
-                
-            else:
-                console.print("[bold red]Invalid command. Please try again.[/bold red]")
+        else:
+            console.print("[bold red]Invalid command. Please try again.[/bold red]")
 
 def main() -> None:
     """
