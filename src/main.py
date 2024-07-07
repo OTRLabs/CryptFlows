@@ -3,10 +3,9 @@ import rich_click as click
 from cryptflows.app import create_workflows_app, initialize_application_services
 
 from datetime import datetime
-from rich.console import Console
+from rich.console import Console, Theme
 #from litestar import Litestar
 import rich_click as click
-from cryptflows.app import create_workflows_app, initialize_application_services
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
