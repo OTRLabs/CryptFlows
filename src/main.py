@@ -83,14 +83,23 @@ def repl():
                 console.print("[bold yellow]Available commands:[/bold yellow]")
                 console.print("  run - Run analysis on a scope")
                 console.print("  scope - Enter the path to the scope directory")
+                console.print("  projects - List all projects in the database")
                 console.print("  help - Show this help message")
                 console.print("  exit - Exit the REPL")
             elif command == "run":
                 scope = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
                 run(scope=scope)
             
-            elif command == ""
-            
+            elif command == "scope":
+                scope = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+                scope_csv_to_working_memory(scope=scope)
+
+            elif command == "projects":
+                console.print("[bold yellow]All projects in the database:[/bold yellow]")
+                console.print("IMPLEMENT ME")
+                
+            else:
+                console.print("[bold red]Invalid command. Please try again.[/bold red]")
 
 def main() -> None:
     """
