@@ -5,5 +5,5 @@ import logging
 import os
 from typing import TYPE_CHECKING, Any
 
-import pyseaweed
+from pyseaweed import WeedFS
 
