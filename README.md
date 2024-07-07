@@ -31,7 +31,7 @@ CryptFlows is a cutting-edge, Langchain-driven agent framework designed to provi
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/CryptFlows.git
+git clone https://github.com/OTRLabs/CryptFlows.git
 
 # Change to the project directory
 cd CryptFlows

@@ -11,6 +11,8 @@ dependencies = [
     "orjson>=3.10.6",
     "polars>=1.0.0",
     "langchain-core>=0.2.11",
+    "advanced-alchemy>=0.17.1",
+    "rich>=13.7.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
