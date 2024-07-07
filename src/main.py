@@ -1,11 +1,46 @@
 from __future__ import annotations
 import rich_click as click
 from cryptflows.app import create_workflows_app, initialize_application_services
+
 from datetime import datetime
 from rich.console import Console
 #from litestar import Litestar
+import rich_click as click
+from cryptflows.app import create_workflows_app, initialize_application_services
+from datetime import datetime
+from rich.console import Console
+from rich.prompt import Prompt
+import csv
+
+console = Console()
+import csv
 
 
+def scope_csv_to_working_memory(scope: str) -> None:
+    """
+    This function takes a scope CSV file and converts it into a working memory. The scope CSV file contains
+    the assets to be analyzed. The scope CSV file is a CSV file that contains the following columns:
+    - id: The ID of the asset. This is used to identify the asset in the scope CSV file.
+    - name: The name of the asset. This is used to identify the asset in the scope CSV file.
+    - type: The type of the asset. This is used to identify the asset in the scope CSV file.
+    - value: The value of the asset. This is used to identify the asset in the scope CSV file.
+
+    Args:
+        scope (str): The path to the scope CSV file.
+
+    Returns:
+        None
+    """
+    # Read the scope CSV file into a list of dictionaries
+    with open(scope, 'r') as f:
+        reader = csv.DictReader(f)
+        scope_list = list(reader)
+
+    # Convert the list of dictionaries into a working memory
+    for asset in scope_list:
+        print(asset)
+
+    return
 
 def run(scope: str):
     """
@@ -27,22 +62,24 @@ def run(scope: str):
     # Print a message to indicate that the analysis is running on the given scope
     console.print(f"[green]Running analysis on scope: {scope}[/green]")
     
-    # Initialize the application services. This step initializes the project database session and
-    # prints a message indicating that projects can be created in the database. It also prints a
-    # message indicating that tasks to be completed from a previous run need to be implemented.
-    with console.status("[bold green]Initializing application...[/bold green]") as status:
-        while not status.is_finished:
-            status.update("Initializing application...")
-            initialize_application_services()
-    
-        console.log("[green]Application initialized. Projects can be created in the database.[/green]")
-        
+    console.print
     # Create the workflows application for the given scope
     create_workflows_app(scope)
 
     # Print a message to indicate that all tasks in all projects have been completed
     click.echo(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
+
+def repl():
+    console.print("[bold green]Cryptflows REPL[/bold green]")
+
+    while True:
+        try:
+            result = console.repl()
+            if result is not None:
+                break
+        except KeyboardInterrupt:
+            break
 
 def main() -> None:
     """
