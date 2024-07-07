@@ -21,6 +21,8 @@ dependencies = [
     "sqlalchemy>=2.0.31",
     "duckdb-engine>=0.13.0",
     "logging>=0.4.9.6",
+    "pyexcel>=0.7.0",
+    "tablib>=3.6.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
