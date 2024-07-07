@@ -7,6 +7,7 @@ import pika
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic, BasicProperties
 from rich import print
+from ...configs.config import Config
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -15,10 +16,10 @@ logger = logging.getLogger(__name__)
 # Utility function to load configuration
 def load_config() -> Dict[str, str]:
     return {
-        "host": os.getenv("RABBITMQ_HOST", "localhost"),
-        "port": int(os.getenv("RABBITMQ_PORT", "5672")),
-        "user": os.getenv("RABBITMQ_USER", "guest"),
-        "password": os.getenv("RABBITMQ_PASSWORD", "guest")
+        "host": Config.RABBITMQ_HOST,
+        "port": Config.RABBITMQ_PASSWORD,
+        "user": Config.RABBITMQ_USER,
+        "password": Config.RABBITMQ_PASSWORD
     }
 
 # Producer
