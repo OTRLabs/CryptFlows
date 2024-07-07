@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from ...configs.config import Config
-from .project_models import Base, Project, Task
+from .project_models import base, Project, Task
 
 def init_project_db_session() -> sessionmaker:
     db_path = 'project_management.db'
@@ -19,7 +19,7 @@ def init_project_db_session() -> sessionmaker:
     try:
         if not os.path.exists(db_path):
             logging.info(f'Creating database at {db_path}')
-            Base.metadata.create_all(engine)
+            base.metadata.create_all(engine)
         else:
             logging.info(f'Reading from database at {db_path}')
             

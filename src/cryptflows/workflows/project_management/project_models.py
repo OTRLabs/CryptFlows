@@ -6,19 +6,19 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, create_engine, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from advanced_alchemy import Base, Repository
+from advanced_alchemy import base, Repository
 
 # Define your base model
 
 # Define your models
-class Project(Base):
+class Project(base):
     __tablename__ = 'projects'
     
     id = Column(Integer, Sequence('project_id_seq'), primary_key=True)
     name = Column(String)
     description = Column(String)
 
-class Task(Base):
+class Task(base):
     __tablename__ = 'tasks'
     
     id = Column(Integer, Sequence('task_id_seq'), primary_key=True)
