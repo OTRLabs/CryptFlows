@@ -9,7 +9,6 @@ from sqlalchemy.orm import sessionmaker
 from advanced_alchemy import Base, Repository
 
 # Define your base model
-Base = declarative_base()
 
 # Define your models
 class Project(Base):
