@@ -1,6 +1,6 @@
 from __future__ import annotations
 import rich_click as click
-from cryptflows.app import create_workflows_app, initialize_application_services
+from cryptflows.app import create_workflows_app
 
 from datetime import datetime
 from rich.console import Console, Theme

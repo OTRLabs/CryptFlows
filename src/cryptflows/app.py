@@ -34,6 +34,9 @@ def create_workflows_app(scope: str) -> None:
     logger = logging.getLogger(__name__)
     print(f"[green]Logger level: {logging.getLevelName(logger.level)}[/green]")
 
+    # Initialize the application services
+    initialize_application_services()
+
     print("[green]Creating workflows application...[/green]")
     
     # Example task and host
