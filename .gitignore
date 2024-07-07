@@ -31,7 +31,8 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-
+/home/user/Documents/OTRLabs/CryptFlows/src/cryptflows/services/storage/database/sql/surql
+/home/user/Documents/OTRLabs/CryptFlows/src/cryptflows/services/storage/seaweed/data
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
