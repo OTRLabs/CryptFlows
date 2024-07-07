@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "litestar>=2.9.1",
+    "pydantic>=2.8.2",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
