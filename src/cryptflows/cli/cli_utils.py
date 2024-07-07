@@ -3,20 +3,18 @@ from typing import TYPE_CHECKING
 
 import rich_click as click
 
+from ..workflows.tasking.scope_management import parse_scope_input_file_into_list_of_strings
 
-@click.group()
-def cli():
-    pass    
+
+
+def run_analysis(scope: str):
     
-@cli.command()
-@cli.option("--scope", "-s", type=click.STRING, help="the path of a .txt file where the scope is stored. each row is a host/artifact/tag", required=True) 
-def run(scope: str):
-    click.echo(f"Scope: {scope}")
+    click.echo(f"[green]Running analysis on scope: {scope}[/green]")
     
-    with open(scope) as f:
-        for line in f:
-            click.echo(f"Line: {line}")
-            
+    scope_asset_lists = parse_scope_input_file_into_list_of_strings(scope_filepath=scope)
+
+    click.echo(f"[green]Running analysis on assets provided in scope: {scope_asset_lists}[/green]")
+    
     click.echo("Done.")
     
     
