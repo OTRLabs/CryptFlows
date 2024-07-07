@@ -29,5 +29,5 @@ async def select_an_ollama_model(console: Console, config: Config,task: dict, li
     
     pass
 
-async def prompt_an_ollama_model(console: Console, config: Config) -> str:
+async def prompt_an_ollama_model(console: Console, config: Config, model_name: str) -> str:
     pass
