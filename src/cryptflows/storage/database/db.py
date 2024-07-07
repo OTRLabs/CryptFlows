@@ -14,3 +14,5 @@ def create_database():
         f"sqlite:///{Config.DUCK_DB_PATH}",
         connect_args={"check_same_thread": False},
     )
+    
+    
