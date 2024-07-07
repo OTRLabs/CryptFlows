@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, create_engine, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from advanced_alchemy import base, repository
+from advanced_alchemy import base, Repository
 
 # Define your base model
 
@@ -28,8 +28,8 @@ class Task(base):
     completed = Column(Integer)
 
 # Repositories for the models
-class ProjectRepository(repository[Project]):
+class ProjectRepository(Repository[Project]):
     model_type = Project
 
-class TaskRepository(repository[Task]):
+class TaskRepository(Repository[Task]):
     model_type = Task
