@@ -5,13 +5,8 @@ from datetime import datetime
 from rich.console import Console
 #from litestar import Litestar
 
-@click.group()
-def cli():
-    pass
 
 
-@cli.command()
-@click.argument("--scope", "-s", type=click.Path(exists=True), default="example_scope")
 def run(scope: str):
     """
     This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
@@ -49,8 +44,28 @@ def run(scope: str):
     click.echo(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
 
-def main():
-    cli()
+def main() -> None:
+    """
+    This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
+    on that scope. The scope is a directory that contains the assets to be analyzed.
 
+    Args:
+        scope (str): The path to the scope directory.
+
+    Returns:
+        None
+    """
+
+    scope: str = click.prompt(
+        "Enter the path to the scope directory",
+        type=click.Path(exists=True),
+    )
+    
+    
+    run(scope=scope)
+    
+    
+    
+    
 if __name__ == "__main__":
     main()
