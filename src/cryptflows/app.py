@@ -6,7 +6,7 @@ from .configs.config import Config
 
 from .workflows.tasking.tasking_utils import send_task, consume_task
 
-def create_workflows_app():
+def create_workflows_app(scope: str) -> None:
     
     print("[green]Creating workflows application...[/green]")
     
