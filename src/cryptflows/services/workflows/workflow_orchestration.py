@@ -2,7 +2,7 @@ from __future__ import annotations
 from rich import print
 import asyncio
 
-from ..configs.config import Config
+from ...configs.config import Config
 
 from ..workflows.tasking.tasking_utils import send_task, consume_task
 
