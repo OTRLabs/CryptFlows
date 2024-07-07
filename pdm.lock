@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:38b901a1e5fbb87998f92a7608880835e2656886545bf95fc50e9342c5e4df15"
+content_hash = "sha256:55b8288230f2e4216c0b988332674c47b75bbc704ef41ada24a5759471783c52"
 
 [[package]]
 name = "advanced-alchemy"
@@ -759,6 +759,19 @@ groups = ["default"]
 files = [
     {file = "pygments-2.18.0-py3-none-any.whl", hash = "sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a"},
     {file = "pygments-2.18.0.tar.gz", hash = "sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199"},
+]
+
+[[package]]
+name = "pyseaweed"
+version = "2.0.0"
+summary = "Module to simplify usage of SeaweedFS in python."
+groups = ["default"]
+dependencies = [
+    "requests",
+    "six",
+]
+files = [
+    {file = "pyseaweed-2.0.0.tar.gz", hash = "sha256:2cd31e2acbcab158d06bc9e2abe347427085474b76b6ca3986712e80a82b72cd"},
 ]
 
 [[package]]
