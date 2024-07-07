@@ -74,12 +74,23 @@ def repl():
     console.print("[bold green]Cryptflows REPL[/bold green]")
 
     while True:
-        try:
-            result = console.repl()
-            if result is not None:
+            command = Prompt.ask("[bold blue]>>>[/bold blue]").strip().lower()
+
+            if command == "exit":
+                console.print("[bold red]Exiting REPL...[/bold red]")
                 break
-        except KeyboardInterrupt:
-            break
+            elif command == "help":
+                console.print("[bold yellow]Available commands:[/bold yellow]")
+                console.print("  run - Run analysis on a scope")
+                console.print("  scope - Enter the path to the scope directory")
+                console.print("  help - Show this help message")
+                console.print("  exit - Exit the REPL")
+            elif command == "run":
+                scope = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+                run(scope=scope)
+            
+            elif command == ""
+            
 
 def main() -> None:
     """
