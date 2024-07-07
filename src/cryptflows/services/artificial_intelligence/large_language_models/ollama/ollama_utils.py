@@ -17,5 +17,17 @@ def get_list_of_models_from_ollama(console: Console, config: Config) -> list:
     console.print(Columns(list_of_models), style="green")
     return list_of_models
 
+
+async def select_an_ollama_model(console: Console, config: Config,task: dict, list_of_models: list) -> str:
+    '''
+    this function is used to select the right ollama model for a specific task.
+    first it assesses the task, and then selects the right model.
+    it analyzes the list_of_models we have available, and returns a string that is the value of the name of the right (or really, best) model name for the task.
+    '''
+    
+    
+    
+    pass
+
 async def prompt_an_ollama_model(console: Console, config: Config) -> str:
     pass
