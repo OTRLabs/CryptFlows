@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+/home/user/Documents/OTRLabs/CryptFlows/src/cryptflows/database/data
 # Distribution / packaging
 .Python
 build/

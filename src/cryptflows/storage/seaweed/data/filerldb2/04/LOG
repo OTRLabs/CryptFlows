@@ -1,0 +1,27 @@
+=============== Jul 7, 2024 (CDT) ===============
+00:49:20.004268 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:49:20.028923 db@open opening
+00:49:20.029350 version@stat F·[] S·0B[] Sc·[]
+00:49:20.054085 db@janitor F·2 G·0
+00:49:20.054141 db@open done T·25.176548ms
+=============== Jul 7, 2024 (CDT) ===============
+08:27:42.378104 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+08:27:42.378399 version@stat F·[] S·0B[] Sc·[]
+08:27:42.378445 db@open opening
+08:27:42.378542 journal@recovery F·1
+08:27:42.378694 journal@recovery recovering @1
+08:27:42.385762 memdb@flush created L0@2 N·1 S·192B "fil...id,v1":"fil...id,v1"
+08:27:42.386291 version@stat F·[1] S·192B[192B] Sc·[0.25]
+08:27:42.407553 db@janitor F·3 G·0
+08:27:42.407577 db@open done T·29.116901ms
+08:28:06.965580 db@close closing
+08:28:06.965728 db@close done T·145.055µs
+=============== Jul 7, 2024 (CDT) ===============
+08:30:27.891869 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+08:30:27.892007 version@stat F·[1] S·192B[192B] Sc·[0.25]
+08:30:27.892029 db@open opening
+08:30:27.892096 journal@recovery F·1
+08:30:27.893312 journal@recovery recovering @3
+08:30:27.905091 version@stat F·[1] S·192B[192B] Sc·[0.25]
+08:30:27.925446 db@janitor F·3 G·0
+08:30:27.925475 db@open done T·33.437145ms
