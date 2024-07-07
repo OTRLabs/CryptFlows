@@ -6,19 +6,25 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String, create_engine, Sequence
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from advanced_alchemy import base, Repository
+from sqlalchemy.orm import Mapped, Session, sessionmaker
+
+from advanced_alchemy.base import UUIDBase
+from advanced_alchemy.filters import LimitOffset
+from advanced_alchemy.repository import SQLAlchemySyncRepository
+from advanced_alchemy.utils.fixtures import open_fixture
+
 
 # Define your base model
 
 # Define your models
-class Project(base):
+class Project(UUIDBase):
     __tablename__ = 'projects'
     
     id = Column(Integer, Sequence('project_id_seq'), primary_key=True)
     name = Column(String)
     description = Column(String)
 
-class Task(base):
+class Task(UUIDBase):
     __tablename__ = 'tasks'
     
     id = Column(Integer, Sequence('task_id_seq'), primary_key=True)
@@ -28,8 +34,8 @@ class Task(base):
     completed = Column(Integer)
 
 # Repositories for the models
-class ProjectRepository(Repository[Project]):
+class ProjectRepository(SQLAlchemySyncRepository[Project]):
     model_type = Project
 
-class TaskRepository(Repository[Task]):
+class TaskRepository(SQLAlchemySyncRepository[Task]):
     model_type = Task
