@@ -10,8 +10,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from ...configs.config import Config
-from .project_models import base, Project, Task
-
+from .project_models import Project, Task
+from advanced_alchemy.base import UUIDBase
 def init_project_db_session() -> sessionmaker:
     db_path = 'project_management.db'
     engine = create_engine(f'duckdb:///{db_path}')
@@ -19,7 +19,7 @@ def init_project_db_session() -> sessionmaker:
     try:
         if not os.path.exists(db_path):
             logging.info(f'Creating database at {db_path}')
-            base.metadata.create_all(engine)
+            UUIDBase.metadata.create_all(engine)
         else:
             logging.info(f'Reading from database at {db_path}')
             
