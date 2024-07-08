@@ -41,7 +41,7 @@ def scope_csv_to_working_memory(scope: str) -> None:
 
     return
 
-def run(scope: str):
+def run(console: Console, scope: str):
     """
     This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
     on that scope. The scope is a directory that contains the assets to be analyzed.
@@ -56,7 +56,7 @@ def run(scope: str):
     start_time = datetime.now()
     
     # Create a console object to print messages to the user
-    console = Console()
+    
     
     # Print a message to indicate that the analysis is running on the given scope
     console.print(f"[green]Running analysis on scope: {scope}[/green]")
@@ -69,7 +69,7 @@ def run(scope: str):
     click.echo(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
 
-def repl() -> None:
+def repl(console: Console) -> None:
     """
     This function is the main entry point of the REPL (Read-Eval-Print Loop) application. It provides a command-line interface for users to interact with the CryptFlows framework.
 
@@ -79,7 +79,7 @@ def repl() -> None:
     Returns:
         None
     """
-    console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
+    
     console.print("[bold green]Cryptflows REPL[/bold green]")
 
     while True:
@@ -121,17 +121,18 @@ def main() -> None:
     Returns:
         None
     """
-
-    scope: str = click.prompt(
+    console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
+    scope: str = console.prompt(
         "Enter the path to the scope directory",
         type=click.Path(exists=True),
     )
     
     
-    run(scope=scope)
+    run(console=console,scope=scope)
     
     
     
     
 if __name__ == "__main__":
+    
     main()
