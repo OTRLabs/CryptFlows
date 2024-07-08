@@ -7,7 +7,7 @@ import pika
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic, BasicProperties
 from rich import print
-from ...configs.config import Config
+from ....configs.config import Config
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

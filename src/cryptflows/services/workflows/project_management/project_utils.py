@@ -9,7 +9,7 @@ import pika
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ...configs.config import Config
+from ....configs.config import Config
 from .project_models import Project, Task
 from advanced_alchemy.base import UUIDBase
 def init_project_db_session() -> sessionmaker:
