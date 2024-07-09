@@ -41,7 +41,7 @@ def main() -> None:
     console.print(f"Initialized at {datetime.now()}...")
     
     console.print(f"Launching REPL at {datetime.now()}...")
-    init_repl(console=console, session=session)
+    init_repl(console=console, db_session=session)
     
     
     
