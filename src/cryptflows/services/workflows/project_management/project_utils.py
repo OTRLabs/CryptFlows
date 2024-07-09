@@ -34,8 +34,8 @@ class ProjectUtils:
             else:
                 logging.info(f'Reading from database at {db_path}')
                 
-            Session = sessionmaker(bind=engine)
-            return Session
+            session = sessionmaker(bind=engine)
+            return session
         except Exception as e:
             logging.error(f'Error initializing project database session: {e}')
             raise e
