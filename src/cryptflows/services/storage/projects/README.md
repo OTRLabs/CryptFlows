@@ -1,1 +1,0 @@
-# Using SQLAlchemy + SQLite to manage project information.
