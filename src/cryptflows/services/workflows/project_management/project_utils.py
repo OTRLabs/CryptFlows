@@ -7,6 +7,7 @@ from datetime import datetime
 
 import pika
 from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 
 from ....configs.config import Config
@@ -109,3 +110,21 @@ def consume_task_from_queue(task_data: dict) -> None:
         raise e
     finally:
         connection.close()
+
+
+from datetime import datetime
+
+
+from typing import List
+
+def list_available_projects() -> List[Project]:
+    """
+    This function lists all available projects in the database.
+
+    :return: List of Project objects
+    """
+    session = Session()
+
+    projects = session.query(Project).all()
+
+    return projects
