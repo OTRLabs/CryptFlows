@@ -134,7 +134,14 @@ def repl(console: Console) -> None:
             console.print("  help - Show this help message")
             console.print("  exit - Exit the REPL")
         elif command == "run":
-            scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+            # check if scope is set
+            # if not, ask user to set scope
+            if not scope_exists():
+                console.print("[bold blue]No scope is set. Please set a scope before running analysis.[/bold blue]")
+                scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
+                scope_csv_to_working_memory(scope=scope)
+
+            
             run(scope=scope)
         
         elif command == "scope":
