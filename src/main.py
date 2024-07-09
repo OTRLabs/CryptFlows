@@ -33,7 +33,7 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-    session = create_workflows_app(console=console)
+    session = initialize_application_services(console=console)
     # connect to all application services
 
 
