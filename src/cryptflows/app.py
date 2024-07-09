@@ -12,6 +12,10 @@ from sqlalchemy.orm import Session
 from rich.console import Console
 from .services.workflows.project_management.project_utils import ProjectUtils
 
+from rich.console import Console
+from sqlalchemy.orm import Session
+from .services.workflows.project_management.project_utils import ProjectUtils
+
 def initialize_application_services(console: Console) -> Session:
     """
     Initializes the application services.
@@ -20,8 +24,8 @@ def initialize_application_services(console: Console) -> Session:
     can be created in the database. It also prints a message indicating that tasks to be completed from
     a previous run need to be implemented.
 
-    :param console: Console object for printing messages
-    :return: Session object representing the project database session
+    :param console: Console object for printing messages of type Console
+    :return: Session object representing the project database session of type Session
     """
     console.print("Initializing workflows application...", style="bold green")
 
@@ -29,7 +33,15 @@ def initialize_application_services(console: Console) -> Session:
 
     return session
 
-    
+
+def init_sqlite_project_db_service_session(console: Console) -> Session:
+    '''
+    returns a session allowing you to use sqlalchemy to read & write to the sqlite database
+    '''
+
+    session: Session = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
+
+    return session
 
 
 def create_workflows_app(console: Console, scope: str) -> None:
