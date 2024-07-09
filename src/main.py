@@ -107,7 +107,7 @@ def repl(console: Console, scope: str) -> None:
             projects_in_storage: list = list_available_projects()
             
         else:
-            console.print("[bold red]Invalid command. Please try again.[/bold red]")
+            console.print("Invalid command. Please try again.", style="red bold")
 
 def main() -> None:
     """
