@@ -33,7 +33,7 @@ class DatabaseUtils:
         """
         return self.SessionLocal()
 
-    def init_db(self) -> None:
+    def init_db(self, engine: Engine) -> None:
         """
         Initialize the database by creating tables.
         """
