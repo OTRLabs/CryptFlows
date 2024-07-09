@@ -33,6 +33,8 @@ def main() -> None:
     console.print(f"Base: {Base}")
     # connect to all application services
     database_utils = DatabaseUtils(console=console)
+    ## check if the sqlite database exists
+    
     session = database_utils.get_session()
 
     console.print(f"Connected to database at {datetime.now()}...")
