@@ -21,10 +21,8 @@ from rich.prompt import Prompt
 
 
 class ProjectUtils:
-    def __init__(self):
-        pass
-        
-    def init_project_db_session(self, console: Console) -> sessionmaker:
+
+    def init_project_db_session(console: Console) -> sessionmaker:
             """Initialize the project database session.
 
             Args:
@@ -52,34 +50,34 @@ class ProjectUtils:
             return session
 
     # Project management functions
-    def create_project(self, console: Console, name: str) -> Project:
-            """Create a project with strongly typed arguments and return type.
+    def create_project(console: Console, name: str) -> Project:
+        """Create a project with strongly typed arguments and return type.
 
-            Args:
-                console (Console): The console object for printing messages.
-                name (str): The name of the project to create.
+        Args:
+            console (Console): The console object for printing messages.
+            name (str): The name of the project to create.
 
-            Returns:
-                Project: The created Project object.
-            """
-            console.print(f'Creating project!')
+        Returns:
+            Project: The created Project object.
+        """
+        console.print(f'Creating project!')
+        
+        session: sessionmaker = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
+        try:
+            project: Project = Project(name=name)
+            session.add(project)
+            session.commit()
+            session.refresh(project)
             
-            session = self.init_project_db_session()
-            try:
-                project = Project(name=name)
-                session.add(project)
-                session.commit()
-                session.refresh(project)
-                
-                console.print(f'Project created: {project}')
+            console.print(f'Project created: {project}')
 
-                return project
-            except Exception as e:
-                logging.error(f'Error creating project: {e}')
-                session.rollback()
-                raise e
-            finally:
-                session.close()
+            return project
+        except Exception as e:
+            logging.error(f'Error creating project: {e}')
+            session.rollback()
+            raise e
+        finally:
+            session.close()
 
     def get_projects(self, session: sessionmaker) -> List[Project]:
         try:
