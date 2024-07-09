@@ -29,4 +29,3 @@ class DatabaseUtils:
         return duck_db_engine
 
         
-    def
