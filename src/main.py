@@ -59,7 +59,6 @@ def run(console: Console, scope: str):
     # Print a message to indicate that the analysis is running on the given scope
     console.print(f"[green]Running analysis on scope: {scope}[/green]")
     
-    console.print
     # Create the workflows application for the given scope
     create_workflows_app(scope)
 
