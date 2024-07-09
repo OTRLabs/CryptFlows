@@ -11,7 +11,7 @@ from advanced_alchemy.utils.fixtures import open_fixture
 def create_database():
     
     duck_db_engine = create_engine(
-        f"sqlite:///{Config.DUCK_DB_PATH}",
+        f"duckdb:///{Config.DUCK_DB_PATH}",
         connect_args={"check_same_thread": False},
     )
     
