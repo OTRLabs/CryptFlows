@@ -28,4 +28,5 @@ class ScopeUtils:
         console.print(f"Scope set to: {scope}")
 
     def get_current_scope(self, scope: str) -> str:
+        # TODO: OPTIMIZE this to actually get the current scope somehow
         return scope
