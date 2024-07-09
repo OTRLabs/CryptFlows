@@ -5,7 +5,7 @@ from cryptflows.app import create_workflows_app
 from datetime import datetime
 from rich.console import Console, Theme
 #from litestar import Litestar
-import rich_click as click
+#import rich_click as click
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
