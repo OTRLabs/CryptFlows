@@ -132,7 +132,7 @@ class CryptFlowsREPL:
 
         while True:
             try:
-                input_string: str = session.prompt("[bold blue]>>> [/bold blue]")
+                input_string: str = session.prompt(">>> ", style="bold cyan")
                 main_command, sub_command = self.parse_command(input_string)
 
                 if main_command in self.commands:
