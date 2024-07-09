@@ -46,7 +46,7 @@ class ProjectUtils:
         
         session = ProjectUtils.init_project_db_session()
         try:
-            project = Project(name=name, created_at=datetime.now())
+            project = Project(name=name)
             session.add(project)
             session.commit()
             session.refresh(project)
