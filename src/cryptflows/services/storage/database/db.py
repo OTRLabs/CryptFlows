@@ -3,7 +3,7 @@ from pathlib import Path
 from rich import get_console
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Mapped, Session, sessionmaker
-from ...configs.config import Config
+from ....configs.config import Config
 from advanced_alchemy.base import UUIDBase
 from advanced_alchemy.filters import LimitOffset
 from advanced_alchemy.repository import SQLAlchemySyncRepository
