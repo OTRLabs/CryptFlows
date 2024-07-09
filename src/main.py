@@ -13,8 +13,9 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import sqlite3
-
-
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 def main() -> None:
     """
     This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
@@ -32,6 +33,8 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
     console.print(f"Initializing at {datetime.now()}...")
 
+    Base = declarative_base
+    console.print(f"Base: {Base}")
     # connect to all application services
     database_utils = DatabaseUtils(console=console)
     session = database_utils.get_session()
@@ -46,7 +49,7 @@ def main() -> None:
 
     
     console.print(f"Launching REPL at {datetime.now()}...")
-    
+
     init_repl(console=console, db_session=session)
     
 if __name__ == "__main__":
