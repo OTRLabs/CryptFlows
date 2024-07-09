@@ -17,7 +17,7 @@ from rich.console import Console
 from ....configs.config import Config
 from .project_models import Project, Task
 from advanced_alchemy.base import UUIDBase
-
+from rich.prompt import Prompt
 class ProjectUtils:
 
     def __init__(self):
@@ -41,13 +41,13 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(console: Console, name: str) -> Project:
+    def create_project(console: Console) -> Project:
         console.print(f'Creating project!')
         
         session = ProjectUtils.init_project_db_session()
-        
+        name = Prompt.ask('Project name: ')
         try:
-            project = Project(name=name)
+            project = Project(name=name, created_at=datetime.now())
             session.add(project)
             session.commit()
             session.refresh(project)
