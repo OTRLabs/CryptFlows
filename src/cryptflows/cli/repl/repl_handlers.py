@@ -2,7 +2,7 @@ from rich.console import Console
 from rich.prompt import Prompt
 from ...services.workflows.project_management.project_utils import list_available_projects
 import csv
-
+from ...services.workflows.project_management.scope_utils import scope_exists, ask_user_for_scope
 from .repl_utils import COMMANDS
 
 from ...app import create_workflows_app
