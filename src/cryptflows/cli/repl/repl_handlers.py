@@ -1,187 +1,155 @@
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
+from typing import Dict, Callable, Any
+import csv
+import logging
+from sqlalchemy.orm import Session
+from prompt_toolkit import PromptSession
+from prompt_toolkit.completion import WordCompleter
+
 from ...services.workflows.project_management.project_utils import ProjectUtils
 from ...services.workflows.project_management.scope_utils import ScopeUtils
 from ...app import create_workflows_app
-from datetime import datetime
-import csv
-import logging
-#from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import Session
+
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Global state
-current_scope = None
+class CryptFlowsREPL:
+    def __init__(self, console: Console, db_session: Session):
+        self.console = console
+        self.db_session = db_session
+        self.current_scope = None
+        self.commands: Dict[str, Dict[str, Callable]] = {}
+        self.register_commands()
 
-COMMANDS = {
-    "projects": {
-        "list": "List all projects",
-        "add": "Add a new project",
-        "remove": "Remove a project",
-    },
-    "scope": {
-        "set": "Set the current scope",
-        "show": "Show the current scope",
-    },
-    "run": {
-        "analysis": "Run analysis on the current scope",
-    },
-    "help": "Show help message",
-    "exit": "Exit the REPL",
-}
+    def register_commands(self):
+        """Register all available commands."""
+        self.register_command("projects", "list", self.list_projects, "List all projects")
+        self.register_command("projects", "add", self.add_project, "Add a new project")
+        self.register_command("projects", "remove", self.remove_project, "Remove a project")
+        self.register_command("scope", "set", self.set_scope, "Set the current scope")
+        self.register_command("scope", "show", self.show_scope, "Show the current scope")
+        self.register_command("run", "analysis", self.run_analysis, "Run analysis on the current scope")
+        self.register_command("help", None, self.show_help, "Show help message")
+        self.register_command("exit", None, self.exit_repl, "Exit the REPL")
 
-def parse_command(input_string: str) -> tuple:
-    """Parse the input string into main command and sub-command."""
-    parts = input_string.strip().lower().split()
-    main_command = parts[0] if parts else ""
-    sub_command = parts[1] if len(parts) > 1 else ""
-    return main_command, sub_command
+    def register_command(self, main_command: str, sub_command: str, func: Callable, description: str):
+        """Register a command with the REPL."""
+        if main_command not in self.commands:
+            self.commands[main_command] = {}
+        self.commands[main_command][sub_command or '__main__'] = {
+            'func': func,
+            'description': description
+        }
 
-def run(console: Console, scope: str) -> None:
-    """Run the analysis on the given scope."""
-    start_time = datetime.now()
-    logging.info(f"Running analysis on scope: {scope}")
-    console.print(f"[green]Running analysis on scope: {scope}[/green]")
-    
-    create_workflows_app(scope)
+    def parse_command(self, input_string: str) -> tuple:
+        """Parse the input string into main command and sub-command."""
+        parts = input_string.strip().lower().split()
+        main_command = parts[0] if parts else ""
+        sub_command = parts[1] if len(parts) > 1 else ""
+        return main_command, sub_command
 
-    end_time = datetime.now()
-    logging.info(f"Analysis completed. Started at: {start_time}, Finished at: {end_time}")
-    console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]")
-    console.print(f"[green]Started at: {start_time}[/green]")
-    console.print(f"[green]Finished at: {end_time}[/green]")
+    def run_analysis(self):
+        """Run the analysis on the current scope."""
+        if not self.current_scope:
+            self.console.print("[yellow]No scope is set. Please set a scope before running analysis.[/yellow]")
+            self.set_scope()
+        
+        if self.current_scope:
+            create_workflows_app(self.current_scope)
+            self.console.print(f"[green]Analysis completed for scope: {self.current_scope}[/green]")
 
-def scope_csv_to_working_memory(console: Console, scope: str) -> None:
-    """Convert scope CSV file to working memory."""
-    try:
-        with open(scope, 'r') as f:
-            reader = csv.DictReader(f)
-            scope_list = list(reader)
-
-        for asset in scope_list:
-            console.print(asset)
-    except FileNotFoundError:
-        console.print(f"[red]Error: Scope file '{scope}' not found.[/red]")
-    except csv.Error as e:
-        console.print(f"[red]Error reading CSV file: {e}[/red]")
-
-def handle_projects(sub_command: str, console: Console) -> None:
-    """Handle 'projects' command and its sub-commands."""
-    if sub_command == "list":
-        projects = ProjectUtils.list_available_projects()
+    def list_projects(self):
+        """List all available projects."""
+        projects = ProjectUtils.list_available_projects(self.db_session)
         if projects:
             table = Table(title="Available Projects")
             table.add_column("Project Name", style="cyan")
             for project in projects:
                 table.add_row(project)
-            console.print(table)
+            self.console.print(table)
         else:
-            console.print("[yellow]No projects found.[/yellow]")
-    elif sub_command == "add":
+            self.console.print("[yellow]No projects found.[/yellow]")
+
+    def add_project(self):
+        """Add a new project."""
         project_name: str = Prompt.ask("Enter project name")
-        
-        ProjectUtils.create_project(console=console, name=project_name, session=Session())
-        #session: Session = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
+        ProjectUtils.create_project(self.console, name=project_name, session=self.db_session)
+        self.current_scope = project_name
+        self.console.print(f"[green]Project '{project_name}' added successfully.[/green]")
+        self.console.print(f"[green]Current scope set to: {self.current_scope}[/green]")
 
-        current_scope = project_name
-        console.print(f"[green]Current scope set to: {current_scope}[/green]")
-        console.print(f"[green]Project '{project_name}' added successfully.[/green]")
-    elif sub_command == "remove":
+    def remove_project(self):
+        """Remove a project."""
         project_name = Prompt.ask("Enter project name to remove")
-        if ProjectUtils.remove_project(project_name):
-            console.print(f"[green]Project '{project_name}' removed successfully.[/green]")
+        if ProjectUtils.remove_project(project_name, self.db_session):
+            self.console.print(f"[green]Project '{project_name}' removed successfully.[/green]")
         else:
-            console.print(f"[red]Project '{project_name}' not found.[/red]")
-    else:
-        console.print("Invalid sub-command for 'projects'", style="red bold")
+            self.console.print(f"[red]Project '{project_name}' not found.[/red]")
 
-def handle_scope(sub_command: str, console: Console) -> None:
-    """Handle 'scope' command and its sub-commands."""
-    global current_scope
-    if sub_command == "set":
+    def set_scope(self):
+        """Set the current scope."""
         scope = Prompt.ask("Enter the path to the scope directory")
         ScopeUtils.set_scope(scope)
-        current_scope = scope
-        console.print(f"[green]Scope set to: {scope}[/green]")
-    elif sub_command == "show":
-        if current_scope:
-            console.print(f"[green]Current scope: {current_scope}[/green]")
+        self.current_scope = scope
+        self.console.print(f"[green]Scope set to: {scope}[/green]")
+
+    def show_scope(self):
+        """Show the current scope."""
+        if self.current_scope:
+            self.console.print(f"[green]Current scope: {self.current_scope}[/green]")
         else:
-            console.print("[yellow]No scope is currently set.[/yellow]")
-    else:
-        console.print("Invalid sub-command for 'scope'", style="red bold")
+            self.console.print("[yellow]No scope is currently set.[/yellow]")
 
-def handle_run(sub_command: str, console: Console) -> None:
-    """Handle 'run' command and its sub-commands."""
-    global current_scope
-    if sub_command == "analysis":
-        if not current_scope:
-            console.print("[yellow]No scope is set. Please set a scope before running analysis.[/yellow]")
-            current_scope = Prompt.ask("Enter the path to the scope directory")
-            ScopeUtils.set_scope(current_scope)
-        run(console, current_scope)
-    else:
-        console.print("Invalid sub-command for 'run'", style="red bold")
+    def show_help(self):
+        """Display help information based on the registered commands."""
+        table = Table(title="Available Commands")
+        table.add_column("Command", style="bold", no_wrap=True)
+        table.add_column("Sub-command", style="bold")
+        table.add_column("Description")
 
-def show_help(console: Console) -> None:
-    """Display help information based on the COMMANDS dictionary."""
-    table = Table(title="Available Commands")
+        for main_command, subcommands in self.commands.items():
+            for sub_command, details in subcommands.items():
+                sub_command_str = sub_command if sub_command != '__main__' else '-'
+                table.add_row(main_command, sub_command_str, details['description'])
 
-    #    Add columns to the table
-    table.add_column("Command Category", style="bold", no_wrap=True)
-    table.add_column("Sub-command", style="bold")
-    table.add_column("Description")
+        self.console.print(table)
 
-    # Add rows to the table
-    for category, subcommands in COMMANDS.items():
-        if isinstance(subcommands, dict):
-            for subcommand, description in subcommands.items():
-                table.add_row(category, subcommand, description)
-        else:
-            table.add_row(category, "-", subcommands)
+    def exit_repl(self):
+        """Exit the REPL."""
+        self.console.print("[bold red]Exiting REPL...[/bold red]")
+        raise SystemExit
 
-    # Print the table
-    console.print(table)
+    def run(self):
+        """Run the REPL."""
+        self.console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
+        self.console.print("Type 'help' for a list of commands.")
 
-def repl(console: Console, session: Session) -> None:
-    """
-    Main REPL (Read-Eval-Print Loop) function for the CryptFlows framework.
-    
-    This function provides a command-line interface for users to interact with various
-    features of the CryptFlows framework, including project management, scope setting,
-    and analysis running.
+        # Create a prompt session with auto-completion
+        command_completer = WordCompleter(list(self.commands.keys()))
+        session = PromptSession(completer=command_completer)
 
-    Args:
-        console (Console): Rich console object for formatted output.
+        while True:
+            try:
+                input_string: str = session.prompt("[bold blue]>>> [/bold blue]")
+                main_command, sub_command = self.parse_command(input_string)
 
-    Returns:
-        None
-    """
-    console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
-    console.print("Type 'help' for a list of commands.")
-
-    console.print(f"Using session: {session}")
-    while True:
-        try:
-            input_string: str = Prompt.ask("[bold blue]>>>[/bold blue]")
-            main_command, sub_command = parse_command(input_string)
-
-            if main_command == "exit":
-                console.print("[bold red]Exiting REPL...[/bold red]")
+                if main_command in self.commands:
+                    if sub_command in self.commands[main_command] or '__main__' in self.commands[main_command]:
+                        command = self.commands[main_command].get(sub_command) or self.commands[main_command]['__main__']
+                        command['func']()
+                    else:
+                        self.console.print(f"Invalid sub-command for '{main_command}'. Type 'help' for available commands.", style="red bold")
+                else:
+                    self.console.print("Invalid command. Type 'help' for a list of commands.", style="red bold")
+            except SystemExit:
                 break
-            elif main_command == "help":
-                show_help(console)
-            elif main_command == "projects":
-                handle_projects(sub_command, console)
-            elif main_command == "scope":
-                handle_scope(sub_command, console)
-            elif main_command == "run":
-                handle_run(sub_command, console)
-            else:
-                console.print("Invalid command. Type 'help' for a list of commands.", style="red bold")
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-            console.print(f"[red]An error occurred: {e}[/red]")
+            except Exception as e:
+                logging.error(f"An error occurred: {e}")
+                self.console.print(f"[red]An error occurred: {e}[/red]")
 
+def init_repl(db_session: Session):
+    console = Console()
+    repl = CryptFlowsREPL(console, db_session)
+    repl.run()

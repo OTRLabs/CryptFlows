@@ -3,7 +3,7 @@ from advanced_alchemy.base import UUIDBase
 from advanced_alchemy.filters import LimitOffset
 from advanced_alchemy.repository import SQLAlchemySyncRepository
 from sqlalchemy import create_engine
-
+from advanced_alchemy.config.sync import SQLAlchemySyncConfig
 from typing import TYPE_CHECKING
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -17,11 +17,15 @@ from advanced_alchemy.base import UUIDBase
 from advanced_alchemy.filters import LimitOffset
 from advanced_alchemy.repository import SQLAlchemySyncRepository
 from advanced_alchemy.utils.fixtures import open_fixture
-
+from .....configs.config import Config
 
 # Define your base model
 
 # Define your models
+
+DuckDBBase = SQLAlchemySyncConfig.create_engine_callable = lambda: create_engine(f"duckdb:///{Config.DUCKDB_PATH}")
+
+
 class Project(UUIDBase):
     __tablename__ = 'projects'
     
