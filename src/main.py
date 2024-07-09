@@ -13,7 +13,7 @@ from rich.prompt import Prompt
 import csv
 from cryptflows.cli.repl.repl_utils import COMMANDS
 from cryptflows.cli.repl.repl_handlers import run, repl
-
+from cryptflows.app import initialize_application_services
 
 def main() -> None:
     """
@@ -32,9 +32,9 @@ def main() -> None:
     console.print("CryptFlows REPL", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-
+    initialize_application_services()
     # connect to all application services
-    
+
 
     scope: str = Prompt.ask(
         "Enter the path to the scope directory",
