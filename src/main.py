@@ -1,5 +1,5 @@
 from __future__ import annotations
-import rich_click as click
+#import rich_click as click
 from cryptflows.app import create_workflows_app
 
 from datetime import datetime
