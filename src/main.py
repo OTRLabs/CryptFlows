@@ -34,7 +34,7 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-    initialize_application_services()
+    initialize_application_services(console=console)
     # connect to all application services
 
 
