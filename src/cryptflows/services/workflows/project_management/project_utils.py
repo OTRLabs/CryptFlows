@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 from rich.console import Console
 from ....configs.config import Config
-from .project_models import Project, Task
+from ....services.storage.database.models.models import Project, Task
 from advanced_alchemy.base import UUIDBase
 from rich.prompt import Prompt
 from sqlalchemy.orm import Session
