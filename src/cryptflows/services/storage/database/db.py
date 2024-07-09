@@ -8,11 +8,22 @@ from advanced_alchemy.base import UUIDBase
 from advanced_alchemy.filters import LimitOffset
 from advanced_alchemy.repository import SQLAlchemySyncRepository
 from advanced_alchemy.utils.fixtures import open_fixture
-def create_database():
-    
-    duck_db_engine = create_engine(
-        f"duckdb:///{Config.DUCK_DB_PATH}",
-        connect_args={"check_same_thread": False},
+
+from .models.models import *
+
+
+from sqlalchemy.engine import Engine
+
+def connect_to_database() -> Engine:
+    """
+    This function connects to the database and returns the database engine.
+
+    Returns:
+        Engine: The SQLAlchemy database engine.
+    """
+    duck_db_engine: Engine = create_engine(
+        f"duckdb:///{Config.DUCKDB_PATH}",
     )
-    
+    return duck_db_engine
+
     
