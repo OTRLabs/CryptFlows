@@ -12,6 +12,8 @@ from cryptflows.services.storage.database.db import DatabaseUtils
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import sqlite3
+
 
 def main() -> None:
     """
@@ -41,6 +43,7 @@ def main() -> None:
     # Example: Fetching projects
     #projects = database_utils.get_projects()
     #console.print(f"Projects: {projects}")
+
     
     console.print(f"Launching REPL at {datetime.now()}...")
     init_repl(console=console, db_session=session)
