@@ -15,31 +15,6 @@ from cryptflows.cli.repl.repl_utils import COMMANDS
 
 
 
-def scope_csv_to_working_memory(scope: str) -> None:
-    """
-    This function takes a scope CSV file and converts it into a working memory. The scope CSV file contains
-    the assets to be analyzed. The scope CSV file is a CSV file that contains the following columns:
-    - id: The ID of the asset. This is used to identify the asset in the scope CSV file.
-    - name: The name of the asset. This is used to identify the asset in the scope CSV file.
-    - type: The type of the asset. This is used to identify the asset in the scope CSV file.
-    - value: The value of the asset. This is used to identify the asset in the scope CSV file.
-
-    Args:
-        scope (str): The path to the scope CSV file.
-
-    Returns:
-        None
-    """
-    # Read the scope CSV file into a list of dictionaries
-    with open(scope, 'r') as f:
-        reader = csv.DictReader(f)
-        scope_list = list(reader)
-
-    # Convert the list of dictionaries into a working memory
-    for asset in scope_list:
-        print(asset)
-
-    return
 
 def run(console: Console, scope: str):
     """
