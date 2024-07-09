@@ -22,4 +22,4 @@ class Config:
     RABBITMQ_USER=os.getenv("RABBITMQ_USER")
     RABBITMQ_PASSWORD=os.getenv("RABBITMQ_PASSWORD")
 
-    SQLITE_DB_PATH=os.getenv("SQLITE_DB_PATH", "cryptflows.db")
+    SQLITE_DB_PATH=os.getenv("SQLITE_DB_PATH", "sqlite:///cryptflows.db")
