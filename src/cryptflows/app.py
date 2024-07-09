@@ -38,7 +38,7 @@ def init_sqlite_project_db_service_session(console: Console) -> Session:
     '''
     returns a session allowing you to use sqlalchemy to read & write to the sqlite database
     '''
-
+    console.print("Initializing connection to the applications sqlite database...", style="bold green")
     session: Session = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
 
     return session

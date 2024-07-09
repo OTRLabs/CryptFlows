@@ -34,6 +34,7 @@ def main() -> None:
 
     console.print(f"Initializing at {datetime.now()}...")
     session = init_sqlite_project_db_service_session(console=console)
+    
     # connect to all application services
 
 
