@@ -2,7 +2,6 @@ from __future__ import annotations
 #import rich_click as click
 from cryptflows.app import create_workflows_app
 from cryptflows.services.workflows.project_management.project_utils import Project
-from cryptflows.services.storage.projects.db_utils import list_available_projects
 from datetime import datetime
 from rich.console import Console, Theme
 #from litestar import Litestar
