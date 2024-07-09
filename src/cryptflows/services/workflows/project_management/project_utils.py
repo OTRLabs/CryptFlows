@@ -147,7 +147,7 @@ class ProjectUtils:
 
 
 
-    def remove_project(console: Console, session: Session, project_id: int) -> None:
+    def remove_project(self, console: Console, session: Session, project_id: int) -> None:
         """
         This function removes a project from the database.
 
