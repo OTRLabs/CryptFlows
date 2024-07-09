@@ -46,6 +46,7 @@ def main() -> None:
 
     
     console.print(f"Launching REPL at {datetime.now()}...")
+    
     init_repl(console=console, db_session=session)
     
 if __name__ == "__main__":
