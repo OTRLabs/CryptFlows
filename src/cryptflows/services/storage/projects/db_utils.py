@@ -16,24 +16,30 @@ def list_available_projects() -> List[Project]:
 
     return projects
 
-def create_new_project(project_name: str):
-    # Create a new session
+from .project_db import Session, Project
+from datetime import datetime
+from typing import List
+
+def create_new_project(project_name: str) -> None:
+    """
+    Create a new project in the database.
+
+    :param project_name: str, the name of the project
+    :return: None
+    """
     session = Session()
 
-    # Create a new project
-    new_project = Project(
-        name="HTB Lab - Lame",
+    new_project: Project = Project(
+        name=f"{project_name} - {datetime.now()}",
         project_type="Hack the Box",
         description="Beginner-friendly HTB machine for practice",
         status="In Progress"
     )
 
-    # Add the new project to the session and commit
     session.add(new_project)
     session.commit()
 
-    # Query all projects
-    projects = session.query(Project).all()
+    projects: List[Project] = session.query(Project).all()
     for project in projects:
         print(f"Project: {project.name}, Type: {project.project_type}, Status: {project.status}")
 
