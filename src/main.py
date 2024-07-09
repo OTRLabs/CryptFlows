@@ -37,9 +37,10 @@ def main() -> None:
     console.print(f"Initializing at {datetime.now()}...")
     
     # connect to all application services
-
+    database_utils = DatabaseUtils(console=console)
+    session = database_utils.connect_to_database()
     #    session = connect_to_database()
-    session = DatabaseUtils.connect_to_database()
+    #session = DatabaseUtils.connect_to_database()
     console.print(f"Connected to database at {datetime.now()}...")
     console.print(f"Initialized at {datetime.now()}...")
     
