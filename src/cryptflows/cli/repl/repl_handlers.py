@@ -1,6 +1,6 @@
 from rich.console import Console
 from rich.prompt import Prompt
-from ...services.storage.projects.db_utils import list_available_projects
+from ...services.workflows.project_management.project_utils import list_available_projects
 import csv
 
 from .repl_utils import COMMANDS
