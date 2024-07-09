@@ -80,8 +80,10 @@ def handle_projects(sub_command: str, console: Console) -> None:
         else:
             console.print("[yellow]No projects found.[/yellow]")
     elif sub_command == "add":
-        project_name = Prompt.ask("Enter project name")
-        ProjectUtils.create_project(name=project_name, console=console, name=project_name)
+        project_name: str = Prompt.ask("Enter project name")
+        ProjectUtils.create_project(console=console, name=project_name)
+        current_scope = project_name
+        console.print(f"[green]Current scope set to: {current_scope}[/green]")
         console.print(f"[green]Project '{project_name}' added successfully.[/green]")
     elif sub_command == "remove":
         project_name = Prompt.ask("Enter project name to remove")
