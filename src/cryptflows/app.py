@@ -22,7 +22,7 @@ def initialize_application_services(console: Console) -> None:
     console.print("Project database session initialized. Projects can be created in the database.", style="bold green")
 
     # TODO: Implement checking for existing tasks that need completion from a previous run
-    console.print("Initializing workflows application...", style="bold green")
+    #console.print("Initializing workflows application...", style="bold green")
 
     
 
