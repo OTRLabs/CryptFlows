@@ -4,7 +4,7 @@ import asyncio
 import logging
 from rich.console import Console
 from .configs.config import Config
-from .services.workflows.project_management.project_utils import init_project_db_session
+from .services.workflows.project_management.project_utils import ProjectUtils
 from .services.workflows.tasking.tasking_utils import send_task, consume_task
 
 def initialize_application_services(console: Console) -> None:
@@ -18,7 +18,7 @@ def initialize_application_services(console: Console) -> None:
     :return: None
     """
     console.print("Initializing project database session...", style="bold green")
-    Session = init_project_db_session()
+    Session = ProjectUtils.init_project_db_session()
     console.print("Project database session initialized. Projects can be created in the database.", style="bold green")
     
     return Session
