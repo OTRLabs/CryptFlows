@@ -119,6 +119,7 @@ def main() -> None:
     Returns:
         None
     """
+    ## init the application's rich console
     console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
     scope: str = Prompt.ask(
         "Enter the path to the scope directory",
