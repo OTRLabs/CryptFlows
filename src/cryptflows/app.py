@@ -25,19 +25,27 @@ def initialize_application_services(console: Console) -> Session:
     """
     console.print("Initializing workflows application...", style="bold green")
 
-    session: Session = ProjectUtils.init_project_db_session()
+    session: Session = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
 
     return session
 
     
 
+from rich.console import Console
+from typing import Optional
+
 def create_workflows_app(console: Console, scope: str) -> None:
+    """
+    Initializes the workflows application.
+
+    :param console: Console object for printing messages
+    :param scope: A string indicating the scope
+    :return: None
+    """
     print("[green]Initializing application...[/green]")
     
     # Configure logging
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__)
-    print(f"[green]Logger level: {logging.getLevelName(logger.level)}[/green]")
+    console.print("Configuring logging...", style="bold green")
 
     # Initialize the application services
     initialize_application_services()
@@ -45,11 +53,11 @@ def create_workflows_app(console: Console, scope: str) -> None:
     console.print("Creating workflows application...", style="bold green")
     
     # Example task and host
-    example_task = {
+    example_task: dict = {
         "queue": "example_queue",
         "body": {"message": "Hello, World!"}
     }
-    example_host = {"host": "localhost"}
+    example_host: dict = {"host": "localhost"}
 
     # Send and consume tasks
     asyncio.run(send_task(example_task, example_host))
