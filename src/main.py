@@ -12,9 +12,10 @@ from rich.prompt import Prompt
 import csv
 from cryptflows.cli.repl.repl_utils import COMMANDS
 from cryptflows.cli.repl.repl_handlers import CryptFlowsREPL, init_repl
-from cryptflows.app import init_sqlite_project_db_service_session
-#from cryptflows.services.storage.projects.scope_utils import ask_user_for_scope
-
+#from cryptflows.app import init_sqlite_project_db_service_session
+#from cryptflows.services.storage.projects.scope_utils import ask_use
+from cryptflows.services.storage.database.db import connect_to_database
+from advanced_alchemy.repository import SQLAlchemySyncRepository
 
 def main() -> None:
     """
@@ -33,11 +34,10 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-    session = init_sqlite_project_db_service_session(console=console)
     
     # connect to all application services
 
-
+    session = connect_to_database(console=console)
     console.print(f"Initialized at {datetime.now()}...")
     
     console.print(f"Launching REPL at {datetime.now()}...")
