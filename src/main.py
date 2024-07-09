@@ -11,6 +11,7 @@ from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
 import csv
+from cryptflows.cli.repl.repl_utils import COMMANDS
 
 
 
