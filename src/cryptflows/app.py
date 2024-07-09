@@ -25,8 +25,7 @@ def initialize_application_services(console: Console) -> Session:
     """
     console.print("Initializing workflows application...", style="bold green")
 
-    project_utils = ProjectUtils()
-    session: Session = project_utils.init_project_db_session()
+    session: Session = ProjectUtils.init_project_db_session()
 
     return session
 
