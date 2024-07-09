@@ -31,8 +31,6 @@ def initialize_application_services(console: Console) -> Session:
 
     
 
-from rich.console import Console
-from typing import Optional
 
 def create_workflows_app(console: Console, scope: str) -> None:
     """

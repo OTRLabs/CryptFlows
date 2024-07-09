@@ -18,29 +18,38 @@ from ....configs.config import Config
 from .project_models import Project, Task
 from advanced_alchemy.base import UUIDBase
 from rich.prompt import Prompt
-class ProjectUtils:
 
+
+class ProjectUtils:
     def __init__(self):
         pass
         
     def init_project_db_session(self, console: Console) -> sessionmaker:
-        # Set the path for the project database
-        db_path = 'project_management.db'
-        
-        # Create an engine to connect to the database using duckdb
-        engine = create_engine(f'duckdb:///{db_path}')
-        
-        # Check if the database file exists
-        if not os.path.exists(db_path):
-            console.print(f'Creating database at {db_path}')
-            # Create the necessary tables in the database
-            UUIDBase.metadata.create_all(engine)
-        else:
-            console.print(f'Reading from database at {db_path}')
+            """Initialize the project database session.
+
+            Args:
+                console (Console): The console object for printing messages.
+
+            Returns:
+                sessionmaker: A sessionmaker bound to the database engine.
+            """
+            # Set the path for the project database
+            db_path: str = 'project_management.db'
             
-        # Create a sessionmaker bound to the engine
-        session = sessionmaker(bind=engine)
-        return session
+            # Create an engine to connect to the database using sqlite
+            engine = create_engine(Config.SQLITE_DB_PATH)
+            
+            # Check if the database file exists
+            if not os.path.exists(db_path):
+                console.print(f'Creating database at {db_path}')
+                # Create the necessary tables in the database
+                UUIDBase.metadata.create_all(engine)
+            else:
+                console.print(f'Reading from database at {db_path}')
+                
+            # Create a sessionmaker bound to the engine
+            session: sessionmaker = sessionmaker(bind=engine)
+            return session
 
     # Project management functions
     def create_project(self, console: Console, name: str) -> Project:
