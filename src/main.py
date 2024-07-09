@@ -65,7 +65,7 @@ def run(console: Console, scope: str):
     create_workflows_app(scope)
 
     # Print a message to indicate that all tasks in all projects have been completed
-    click.echo(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
+    console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
 
 def repl(console: Console) -> None:
