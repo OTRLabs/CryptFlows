@@ -6,8 +6,13 @@ from rich.console import Console
 from .configs.config import Config
 from .services.workflows.project_management.project_utils import ProjectUtils
 from .services.workflows.tasking.tasking_utils import send_task, consume_task
+from sqlalchemy.orm import Session
 
-def initialize_application_services(console: Console) -> None:
+
+from rich.console import Console
+from .services.workflows.project_management.project_utils import ProjectUtils
+
+def initialize_application_services(console: Console) -> Session:
     """
     Initializes the application services.
 
@@ -15,15 +20,15 @@ def initialize_application_services(console: Console) -> None:
     can be created in the database. It also prints a message indicating that tasks to be completed from
     a previous run need to be implemented.
 
-    :return: None
+    :param console: Console object for printing messages
+    :return: Session object representing the project database session
     """
-    console.print("Initializing project database session...", style="bold green")
-    Session = ProjectUtils.init_project_db_session()
-    console.print("Project database session initialized. Projects can be created in the database.", style="bold green")
-    
-    return Session
-    # TODO: Implement checking for existing tasks that need completion from a previous run
-    #console.print("Initializing workflows application...", style="bold green")
+    console.print("Initializing workflows application...", style="bold green")
+
+    project_utils = ProjectUtils()
+    project_utils.init_project_db_session()
+
+    return project_utils.session
 
     
 
