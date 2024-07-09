@@ -11,7 +11,6 @@ from rich.console import Console
 from rich.prompt import Prompt
 import csv
 
-import csv
 
 
 def scope_csv_to_working_memory(scope: str) -> None:
