@@ -23,7 +23,7 @@ class ProjectUtils:
     def __init__(self):
         pass
         
-    def init_project_db_session() -> sessionmaker:
+    def init_project_db_session(self) -> sessionmaker:
         db_path = 'project_management.db'
         engine = create_engine(f'duckdb:///{db_path}')
         
@@ -41,10 +41,10 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(console: Console, name: str) -> Project:
+    def create_project(self,console: Console, name: str) -> Project:
         console.print(f'Creating project!')
         
-        session = ProjectUtils.init_project_db_session()
+        session = self.init_project_db_session()
         try:
             project = Project(name=name)
             session.add(project)
@@ -61,7 +61,7 @@ class ProjectUtils:
         finally:
             session.close()
 
-    def get_projects(session: sessionmaker) -> List[Project]:
+    def get_projects(self, session: sessionmaker) -> List[Project]:
         try:
             projects = session.query(Project).all()
             return projects
