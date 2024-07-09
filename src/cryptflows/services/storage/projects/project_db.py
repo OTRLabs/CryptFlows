@@ -18,6 +18,3 @@ class Project(Base):
     status = Column(Enum('Planned', 'In Progress', 'Completed', name='project_statuses'), default='Planned')
     description = Column(String)
 
-Base.metadata.create_all(engine)
-
-Session = sessionmaker(bind=engine)

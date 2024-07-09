@@ -23,7 +23,10 @@ class Project(UUIDBase):
     id = Column(Integer, Sequence('project_id_seq'), primary_key=True)
     name = Column(String)
     description = Column(String)
-
+    start_date = Column(String, nullable=False)
+    end_date = Column(String)
+    status = Column(String)
+    scope = Column(String)
 class Task(UUIDBase):
     __tablename__ = 'tasks'
     
