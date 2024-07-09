@@ -140,3 +140,15 @@ class ProjectUtils:
         return projects
 
 
+
+    def remove_project(session: Session, project_id: int) -> None:
+        """
+        This function removes a project from the database.
+
+        :param session: SQLAlchemy session of type Session
+        :param project_id: ID of the project to remove of type int
+        :return: None
+        """
+        project: Project = session.query(Project).get(project_id)
+        session.delete(project)
+        session.commit()
