@@ -82,7 +82,7 @@ def handle_projects(sub_command: str, console: Console) -> None:
     elif sub_command == "add":
         project_name: str = Prompt.ask("Enter project name")
         
-        ProjectUtils.create_project(console=console, name=project_name, session=)
+        ProjectUtils.create_project(console=console, name=project_name, session=Session())
         #session: Session = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
 
         current_scope = project_name
@@ -162,6 +162,7 @@ def repl(console: Console, session: Session) -> None:
     console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
     console.print("Type 'help' for a list of commands.")
 
+    console.print(f"Using session: {session}")
     while True:
         try:
             input_string: str = Prompt.ask("[bold blue]>>>[/bold blue]")

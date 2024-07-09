@@ -52,7 +52,7 @@ class ProjectUtils:
         return Session
 
     # Project management functions
-    def create_project(console: Console, name: str, session: Session) -> Project:
+    def create_project(console: Console, name: str, session: Session):
         """Create a project with strongly typed arguments and return type.
 
         Args:
