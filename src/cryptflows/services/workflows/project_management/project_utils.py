@@ -71,7 +71,7 @@ class ProjectUtils:
         finally:
             session.close()
 
-    def add_task_to_project(session: sessionmaker, project_id: int, task_name: str, description: str) -> None:
+    def add_task_to_project(self,session: sessionmaker, project_id: int, task_name: str, description: str) -> None:
         try:
             task = Task(project_id=project_id, title=task_name, description=description, completed=False)
             session.add(task)
@@ -84,7 +84,7 @@ class ProjectUtils:
         finally:
             session.close()
 
-    def get_tasks_for_project(session: sessionmaker, project_id: int) -> List[Task]:
+    def get_tasks_for_project(self, session: sessionmaker, project_id: int) -> List[Task]:
         try:
             tasks = session.query(Task).filter_by(project_id=project_id).all()
             return tasks
@@ -108,7 +108,7 @@ class ProjectUtils:
         finally:
             connection.close()
 
-    def consume_task_from_queue(task_data: dict) -> None:
+    def consume_task_from_queue(self, task_data: dict) -> None:
         def callback(ch, method, properties, body):
             logging.info(f"Received task: {body}")
             # Here you can add the logic to process the task
@@ -133,7 +133,7 @@ class ProjectUtils:
 
     from typing import List
 
-    def list_available_projects() -> List[Project]:
+    def list_available_projects(self, console: Console, session: Session) -> List[Project]:
         """
         This function lists all available projects in the database.
 
@@ -142,7 +142,7 @@ class ProjectUtils:
         session = Session()
 
         projects = session.query(Project).all()
-
+        console.print(f"Available projects: {projects}")
         return projects
 
 
