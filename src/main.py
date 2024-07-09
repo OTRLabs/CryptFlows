@@ -28,6 +28,14 @@ def main() -> None:
     """
     ## init the application's rich console
     console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
+
+    console.print("CryptFlows REPL", style="bold green")
+
+    console.print(f"Initializing at {datetime.now()}...")
+
+    # connect to all application services
+    
+
     scope: str = Prompt.ask(
         "Enter the path to the scope directory",
     )
