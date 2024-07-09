@@ -16,10 +16,12 @@ import sqlite3
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
+
 def main() -> None:
     """
     This is the main entry point of the CLI application. 
-    
+
     """
     ## init the application's rich console
     console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
