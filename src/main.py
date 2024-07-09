@@ -33,14 +33,14 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-    initialize_application_services(console=console)
+    session = initialize_application_services(console=console)
     # connect to all application services
 
 
     console.print(f"Initialized at {datetime.now()}...")
     
     console.print(f"Launching REPL at {datetime.now()}...")
-    repl(console=console)
+    repl(console=console, session=session)
     
     
     

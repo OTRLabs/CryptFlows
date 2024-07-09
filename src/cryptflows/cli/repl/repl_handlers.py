@@ -139,7 +139,7 @@ def show_help(console: Console) -> None:
     # Print the table
     console.print(table)
 
-def repl(console: Console) -> None:
+def repl(console: Console, session: Session) -> None:
     """
     Main REPL (Read-Eval-Print Loop) function for the CryptFlows framework.
     
