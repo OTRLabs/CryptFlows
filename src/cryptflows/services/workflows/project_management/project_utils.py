@@ -41,8 +41,11 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(console: Console, session: sessionmaker, name: str) -> Project:
+    def create_project(console: Console, name: str) -> Project:
         console.print(f'Creating project!')
+        
+        session = ProjectUtils.init_project_db_session()
+        
         try:
             project = Project(name=name)
             session.add(project)
