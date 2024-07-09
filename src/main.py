@@ -67,7 +67,7 @@ def run(console: Console, scope: str):
     console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
 
 
-def repl(console: Console) -> None:
+def repl(console: Console, scope: str) -> None:
     """
     This function is the main entry point of the REPL (Read-Eval-Print Loop) application. It provides a command-line interface for users to interact with the CryptFlows framework.
 
