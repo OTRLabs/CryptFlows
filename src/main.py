@@ -102,8 +102,8 @@ def repl(console: Console, scope: str) -> None:
             scope_csv_to_working_memory(scope=scope)
 
         elif command == "projects":
-            console.print("[bold yellow]All projects in the database:[/bold yellow]")
-            console.print("IMPLEMENT ME")
+            console.print("All projects in the database", style="yellow bold")
+            
             projects_in_storage: list = list_available_projects()
             
         else:
