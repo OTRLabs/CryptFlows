@@ -5,6 +5,37 @@ import csv
 
 from .repl_utils import COMMANDS
 
+from ...app import create_workflows_app
+
+from datetime import datetime
+def run(console: Console, scope: str):
+    """
+    This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
+    on that scope. The scope is a directory that contains the assets to be analyzed.
+
+    Args:
+        scope (str): The path to the scope directory.
+
+    Returns:
+        None
+    """
+    # Record the start time of the analysis
+    start_time = datetime.now()
+    
+    # Create a console object to print messages to the user
+    
+    
+    # Print a message to indicate that the analysis is running on the given scope
+    console.print(f"[green]Running analysis on scope: {scope}[/green]")
+    
+    # Create the workflows application for the given scope
+    create_workflows_app(scope)
+
+    # Print a message to indicate that all tasks in all projects have been completed
+    console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
+
+
+
 
 def scope_csv_to_working_memory(scope: str) -> None:
     """
