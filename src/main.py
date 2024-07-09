@@ -103,6 +103,7 @@ def repl(console: Console, scope: str) -> None:
         elif command == "projects":
             console.print("[bold yellow]All projects in the database:[/bold yellow]")
             console.print("IMPLEMENT ME")
+            projects_in_storage: list = list_available_projects()
             
         else:
             console.print("[bold red]Invalid command. Please try again.[/bold red]")
