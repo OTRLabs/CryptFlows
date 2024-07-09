@@ -2,7 +2,7 @@ from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
 from ...services.workflows.project_management.project_utils import list_available_projects, add_project, remove_project
-from ...services.workflows.project_management.scope_utils import scope_exists, set_scope, get_current_scope
+from ...services.workflows.project_management.scope_utils import ScopeUtils
 from ...app import create_workflows_app
 from datetime import datetime
 import csv
@@ -96,7 +96,7 @@ def handle_scope(sub_command: str, console: Console) -> None:
     global current_scope
     if sub_command == "set":
         scope = Prompt.ask("Enter the path to the scope directory")
-        set_scope(scope)
+        ScopeUtils.set_scope(scope)
         current_scope = scope
         console.print(f"[green]Scope set to: {scope}[/green]")
     elif sub_command == "show":
@@ -114,7 +114,7 @@ def handle_run(sub_command: str, console: Console) -> None:
         if not current_scope:
             console.print("[yellow]No scope is set. Please set a scope before running analysis.[/yellow]")
             current_scope = Prompt.ask("Enter the path to the scope directory")
-            set_scope(current_scope)
+            ScopeUtils.set_scope(current_scope)
         run(console, current_scope)
     else:
         console.print("Invalid sub-command for 'run'", style="red bold")
