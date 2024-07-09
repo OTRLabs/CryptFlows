@@ -12,7 +12,7 @@ from rich.prompt import Prompt
 import csv
 from cryptflows.cli.repl.repl_utils import COMMANDS
 from cryptflows.cli.repl.repl_handlers import run, repl
-from cryptflows.app import initialize_application_services
+from cryptflows.app import init_sqlite_project_db_service_session
 #from cryptflows.services.storage.projects.scope_utils import ask_user_for_scope
 
 
@@ -33,7 +33,7 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
 
     console.print(f"Initializing at {datetime.now()}...")
-    session = initialize_application_services(console=console)
+    session = init_sqlite_project_db_service_session(console=console)
     # connect to all application services
 
 
