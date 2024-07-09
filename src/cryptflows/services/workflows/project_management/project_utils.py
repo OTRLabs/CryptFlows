@@ -23,22 +23,18 @@ class ProjectUtils:
     def __init__(self):
         pass
         
-    def init_project_db_session(self) -> sessionmaker:
+    def init_project_db_session(self):
         db_path = 'project_management.db'
         engine = create_engine(f'duckdb:///{db_path}')
         
-        try:
-            if not os.path.exists(db_path):
-                logging.info(f'Creating database at {db_path}')
-                UUIDBase.metadata.create_all(engine)
-            else:
-                logging.info(f'Reading from database at {db_path}')
-                
-            session = sessionmaker(bind=engine)
-            return session
-        except Exception as e:
-            logging.error(f'Error initializing project database session: {e}')
-            raise e
+        if not os.path.exists(db_path):
+            logging.info(f'Creating database at {db_path}')
+            UUIDBase.metadata.create_all(engine)
+        else:
+            logging.info(f'Reading from database at {db_path}')
+            
+        session = sessionmaker(bind=engine)
+        return session
 
     # Project management functions
     def create_project(self, console: Console, name: str) -> Project:
