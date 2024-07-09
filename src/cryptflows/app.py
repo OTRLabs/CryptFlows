@@ -18,9 +18,10 @@ def initialize_application_services(console: Console) -> None:
     :return: None
     """
     console.print("Initializing project database session...", style="bold green")
-    init_project_db_session()
+    Session = init_project_db_session()
     console.print("Project database session initialized. Projects can be created in the database.", style="bold green")
-
+    
+    return Session
     # TODO: Implement checking for existing tasks that need completion from a previous run
     #console.print("Initializing workflows application...", style="bold green")
 
