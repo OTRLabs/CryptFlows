@@ -13,6 +13,7 @@ class Project(Base):
     name = Column(String, nullable=False)
     project_type = Column(Enum('Hack the Box', 'Bug Bounty', 'Red Team', 'Penetration Test', 'Security Compliance', name='project_types'), nullable=False)
     start_date = Column(DateTime, default=datetime.utcnow)
+    scope = Column(String)
     end_date = Column(DateTime)
     status = Column(Enum('Planned', 'In Progress', 'Completed', name='project_statuses'), default='Planned')
     description = Column(String)
