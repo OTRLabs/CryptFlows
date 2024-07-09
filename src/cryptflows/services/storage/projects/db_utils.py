@@ -5,7 +5,10 @@ from datetime import datetime
 def list_available_projects() -> list:
 
     session = Session()
-    
+
+    projects = session.query(Project).all()
+
+    return projects
 
 def create_new_project(project_name: str):
     # Create a new session
