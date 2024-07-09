@@ -23,8 +23,7 @@ from .....configs.config import Config
 
 # Define your models
 
-DuckDBBase = SQLAlchemySyncConfig.create_engine_callable = lambda: create_engine(f"duckdb:///{Config.DUCKDB_PATH}")
-
+Base = declarative_base()
 
 class Project(UUIDBase):
     __tablename__ = 'projects'
