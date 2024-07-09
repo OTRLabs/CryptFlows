@@ -13,7 +13,7 @@ import pika
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
-
+from rich.console import Console
 from ....configs.config import Config
 from .project_models import Project, Task
 from advanced_alchemy.base import UUIDBase
@@ -141,7 +141,7 @@ class ProjectUtils:
 
 
 
-    def remove_project(session: Session, project_id: int) -> None:
+    def remove_project(console: Console, session: Session, project_id: int) -> None:
         """
         This function removes a project from the database.
 
@@ -149,6 +149,8 @@ class ProjectUtils:
         :param project_id: ID of the project to remove of type int
         :return: None
         """
+        console.print(f"Removing project with ID {project_id}...")
         project: Project = session.query(Project).get(project_id)
         session.delete(project)
         session.commit()
+        console.print(f"Project with ID {project_id} removed successfully.")
