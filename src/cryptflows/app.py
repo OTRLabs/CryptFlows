@@ -2,12 +2,12 @@ from __future__ import annotations
 from rich import print
 import asyncio
 import logging
-
+from rich.console import Console
 from .configs.config import Config
 from .services.workflows.project_management.project_utils import init_project_db_session
 from .services.workflows.tasking.tasking_utils import send_task, consume_task
 
-def initialize_application_services() -> None:
+def initialize_application_services(console: Console, scope: str) -> None:
     """
     Initializes the application services.
 
@@ -17,12 +17,12 @@ def initialize_application_services() -> None:
 
     :return: None
     """
-    print("[green]Initializing project database session...[/green]")
+    console.print("Initializing project database session...", style="bold green")
     init_project_db_session()
     print("[green]Project database session initialized. Projects can be created in the database.[/green]")
 
     # TODO: Implement checking for existing tasks that need completion from a previous run
-    print("[green]Initializing workflows application...[/green]")
+    console.print("Initializing workflows application...", style="bold green")
 
     
 
