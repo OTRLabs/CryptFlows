@@ -37,7 +37,7 @@ def run(console: Console, scope: str):
 
 
 
-def scope_csv_to_working_memory(scope: str) -> None:
+def scope_csv_to_working_memory(console: Console, scope: str) -> None:
     """
     This function takes a scope CSV file and converts it into a working memory. The scope CSV file contains
     the assets to be analyzed. The scope CSV file is a CSV file that contains the following columns:
@@ -59,7 +59,7 @@ def scope_csv_to_working_memory(scope: str) -> None:
 
     # Convert the list of dictionaries into a working memory
     for asset in scope_list:
-        print(asset)
+        console.print(asset)
 
     return
 
