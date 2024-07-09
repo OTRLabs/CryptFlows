@@ -107,7 +107,7 @@ def show_help(console: Console) -> None:
 
 
 
-def repl(console: Console, scope: str) -> None:
+def repl(console: Console) -> None:
     """
     This function is the main entry point of the REPL (Read-Eval-Print Loop) application. It provides a command-line interface for users to interact with the CryptFlows framework.
 
@@ -118,7 +118,7 @@ def repl(console: Console, scope: str) -> None:
         None
     """
     
-    console.print("[bold green]Cryptflows REPL[/bold green]")
+    #console.print("[bold green]Cryptflows REPL[/bold green]")
 
     while True:
         command: str = Prompt.ask("[bold blue]>>>[/bold blue]").strip().lower()
