@@ -14,8 +14,9 @@ from cryptflows.cli.repl.repl_utils import COMMANDS
 from cryptflows.cli.repl.repl_handlers import CryptFlowsREPL, init_repl
 #from cryptflows.app import init_sqlite_project_db_service_session
 #from cryptflows.services.storage.projects.scope_utils import ask_use
-from cryptflows.services.storage.database.db import connect_to_database
+#from cryptflows.services.storage.database.db import connect_to_database
 from advanced_alchemy.repository import SQLAlchemySyncRepository
+from cryptflows.services.storage.database.db import DatabaseUtils
 
 def main() -> None:
     """
@@ -38,7 +39,7 @@ def main() -> None:
     # connect to all application services
 
     #    session = connect_to_database()
-    
+    session = DatabaseUtils.connect_to_database()
     console.print(f"Connected to database at {datetime.now()}...")
     console.print(f"Initialized at {datetime.now()}...")
     
