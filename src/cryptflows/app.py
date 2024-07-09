@@ -7,7 +7,7 @@ from .configs.config import Config
 from .services.workflows.project_management.project_utils import init_project_db_session
 from .services.workflows.tasking.tasking_utils import send_task, consume_task
 
-def initialize_application_services(console: Console, scope: str) -> None:
+def initialize_application_services(console: Console) -> None:
     """
     Initializes the application services.
 
