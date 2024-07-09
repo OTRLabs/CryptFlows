@@ -26,7 +26,7 @@ def initialize_application_services(console: Console, scope: str) -> None:
 
     
 
-def create_workflows_app(scope: str) -> None:
+def create_workflows_app(console: Console, scope: str) -> None:
     print("[green]Initializing application...[/green]")
     
     # Configure logging
