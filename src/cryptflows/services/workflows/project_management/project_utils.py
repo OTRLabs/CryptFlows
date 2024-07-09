@@ -41,11 +41,10 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(console: Console) -> Project:
+    def create_project(console: Console, name: str) -> Project:
         console.print(f'Creating project!')
         
         session = ProjectUtils.init_project_db_session()
-        name = Prompt.ask('Project name: ')
         try:
             project = Project(name=name, created_at=datetime.now())
             session.add(project)
