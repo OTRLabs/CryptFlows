@@ -37,7 +37,8 @@ def main() -> None:
     
     # connect to all application services
 
-    session = connect_to_database(console=console)
+    session = connect_to_database()
+    console.print(f"Connected to database at {datetime.now()}...")
     console.print(f"Initialized at {datetime.now()}...")
     
     console.print(f"Launching REPL at {datetime.now()}...")
