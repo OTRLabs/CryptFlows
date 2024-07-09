@@ -2,8 +2,14 @@ from .project_db import Session, Project
 from datetime import datetime
 
 
-def list_available_projects() -> list:
+from typing import List
 
+def list_available_projects() -> List[Project]:
+    """
+    This function lists all available projects in the database.
+
+    :return: List of Project objects
+    """
     session = Session()
 
     projects = session.query(Project).all()
