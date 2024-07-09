@@ -1,7 +1,7 @@
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
-from ...services.workflows.project_management.project_utils import list_available_projects, add_project, remove_project
+from ...services.workflows.project_management.project_utils import ProjectUtils
 from ...services.workflows.project_management.scope_utils import ScopeUtils
 from ...app import create_workflows_app
 from datetime import datetime
@@ -69,7 +69,7 @@ def scope_csv_to_working_memory(console: Console, scope: str) -> None:
 def handle_projects(sub_command: str, console: Console) -> None:
     """Handle 'projects' command and its sub-commands."""
     if sub_command == "list":
-        projects = list_available_projects()
+        projects = ProjectUtils.list_available_projects()
         if projects:
             table = Table(title="Available Projects")
             table.add_column("Project Name", style="cyan")
@@ -80,11 +80,11 @@ def handle_projects(sub_command: str, console: Console) -> None:
             console.print("[yellow]No projects found.[/yellow]")
     elif sub_command == "add":
         project_name = Prompt.ask("Enter project name")
-        add_project(project_name)
+        ProjectUtils.add_project(project_name)
         console.print(f"[green]Project '{project_name}' added successfully.[/green]")
     elif sub_command == "remove":
         project_name = Prompt.ask("Enter project name to remove")
-        if remove_project(project_name):
+        if ProjectUtils.remove_project(project_name):
             console.print(f"[green]Project '{project_name}' removed successfully.[/green]")
         else:
             console.print(f"[red]Project '{project_name}' not found.[/red]")
