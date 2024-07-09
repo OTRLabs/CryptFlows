@@ -18,14 +18,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 def main() -> None:
     """
-    This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
-    on that scope. The scope is a directory that contains the assets to be analyzed.
-
-    Args:
-        scope (str): The path to the scope directory.
-
-    Returns:
-        None
+    This is the main entry point of the CLI application. 
+    
     """
     ## init the application's rich console
     console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
