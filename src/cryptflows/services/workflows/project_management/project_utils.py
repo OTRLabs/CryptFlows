@@ -41,25 +41,34 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(self,console: Console, name: str) -> Project:
-        console.print(f'Creating project!')
-        
-        session = self.init_project_db_session()
-        try:
-            project = Project(name=name)
-            session.add(project)
-            session.commit()
-            session.refresh(project)
-            
-            console.print(f'Project created: {project}')
+    def create_project(self, console: Console, name: str) -> Project:
+            """Create a project with strongly typed arguments and return type.
 
-            return project
-        except Exception as e:
-            logging.error(f'Error creating project: {e}')
-            session.rollback()
-            raise e
-        finally:
-            session.close()
+            Args:
+                console (Console): The console object for printing messages.
+                name (str): The name of the project to create.
+
+            Returns:
+                Project: The created Project object.
+            """
+            console.print(f'Creating project!')
+            
+            session = self.init_project_db_session()
+            try:
+                project = Project(name=name)
+                session.add(project)
+                session.commit()
+                session.refresh(project)
+                
+                console.print(f'Project created: {project}')
+
+                return project
+            except Exception as e:
+                logging.error(f'Error creating project: {e}')
+                session.rollback()
+                raise e
+            finally:
+                session.close()
 
     def get_projects(self, session: sessionmaker) -> List[Project]:
         try:
