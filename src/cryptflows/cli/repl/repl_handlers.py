@@ -1,100 +1,126 @@
 from rich.console import Console
 from rich.prompt import Prompt
-from ...services.workflows.project_management.project_utils import list_available_projects
-import csv
-from ...services.workflows.project_management.scope_utils import scope_exists, ask_user_for_scope
-from .repl_utils import COMMANDS
-
+from rich.table import Table
+from ...services.workflows.project_management.project_utils import list_available_projects, add_project, remove_project
+from ...services.workflows.project_management.scope_utils import scope_exists, set_scope, get_current_scope
 from ...app import create_workflows_app
-
 from datetime import datetime
-def run(console: Console, scope: str):
-    """
-    This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
-    on that scope. The scope is a directory that contains the assets to be analyzed.
+import csv
+import logging
 
-    Args:
-        scope (str): The path to the scope directory.
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    Returns:
-        None
-    """
-    # Record the start time of the analysis
+# Global state
+current_scope = None
+
+COMMANDS = {
+    "projects": {
+        "list": "List all projects",
+        "add": "Add a new project",
+        "remove": "Remove a project",
+    },
+    "scope": {
+        "set": "Set the current scope",
+        "show": "Show the current scope",
+    },
+    "run": {
+        "analysis": "Run analysis on the current scope",
+    },
+    "help": "Show help message",
+    "exit": "Exit the REPL",
+}
+
+def parse_command(input_string: str) -> tuple:
+    """Parse the input string into main command and sub-command."""
+    parts = input_string.strip().lower().split()
+    main_command = parts[0] if parts else ""
+    sub_command = parts[1] if len(parts) > 1 else ""
+    return main_command, sub_command
+
+def run(console: Console, scope: str) -> None:
+    """Run the analysis on the given scope."""
     start_time = datetime.now()
-    
-    # Create a console object to print messages to the user
-    
-    
-    # Print a message to indicate that the analysis is running on the given scope
+    logging.info(f"Running analysis on scope: {scope}")
     console.print(f"[green]Running analysis on scope: {scope}[/green]")
     
-    # Create the workflows application for the given scope
     create_workflows_app(scope)
 
-    # Print a message to indicate that all tasks in all projects have been completed
-    console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]\n\n\n[green]Started at: {start_time}\n[/green][green]Finished at: {datetime.now()}[/green]")
-
-
-
+    end_time = datetime.now()
+    logging.info(f"Analysis completed. Started at: {start_time}, Finished at: {end_time}")
+    console.print(f"[green][bold]All tasks in all projects have been completed.[/bold][/green]")
+    console.print(f"[green]Started at: {start_time}[/green]")
+    console.print(f"[green]Finished at: {end_time}[/green]")
 
 def scope_csv_to_working_memory(console: Console, scope: str) -> None:
-    """
-    This function takes a scope CSV file and converts it into a working memory. The scope CSV file contains
-    the assets to be analyzed. The scope CSV file is a CSV file that contains the following columns:
-    - id: The ID of the asset. This is used to identify the asset in the scope CSV file.
-    - name: The name of the asset. This is used to identify the asset in the scope CSV file.
-    - type: The type of the asset. This is used to identify the asset in the scope CSV file.
-    - value: The value of the asset. This is used to identify the asset in the scope CSV file.
+    """Convert scope CSV file to working memory."""
+    try:
+        with open(scope, 'r') as f:
+            reader = csv.DictReader(f)
+            scope_list = list(reader)
 
-    Args:
-        scope (str): The path to the scope CSV file.
-
-    Returns:
-        None
-    """
-    # Read the scope CSV file into a list of dictionaries
-    with open(scope, 'r') as f:
-        reader = csv.DictReader(f)
-        scope_list = list(reader)
-
-    # Convert the list of dictionaries into a working memory
-    for asset in scope_list:
-        console.print(asset)
-
-    return
+        for asset in scope_list:
+            console.print(asset)
+    except FileNotFoundError:
+        console.print(f"[red]Error: Scope file '{scope}' not found.[/red]")
+    except csv.Error as e:
+        console.print(f"[red]Error reading CSV file: {e}[/red]")
 
 def handle_projects(sub_command: str, console: Console) -> None:
+    """Handle 'projects' command and its sub-commands."""
     if sub_command == "list":
-        console.print("Listing all projects...")
-        projects_in_storage = list_available_projects()
-        # Display projects_in_storage
+        projects = list_available_projects()
+        if projects:
+            table = Table(title="Available Projects")
+            table.add_column("Project Name", style="cyan")
+            for project in projects:
+                table.add_row(project)
+            console.print(table)
+        else:
+            console.print("[yellow]No projects found.[/yellow]")
     elif sub_command == "add":
         project_name = Prompt.ask("Enter project name")
-        # Add project logic here
+        add_project(project_name)
+        console.print(f"[green]Project '{project_name}' added successfully.[/green]")
     elif sub_command == "remove":
         project_name = Prompt.ask("Enter project name to remove")
-        # Remove project logic here
+        if remove_project(project_name):
+            console.print(f"[green]Project '{project_name}' removed successfully.[/green]")
+        else:
+            console.print(f"[red]Project '{project_name}' not found.[/red]")
     else:
         console.print("Invalid sub-command for 'projects'", style="red bold")
 
 def handle_scope(sub_command: str, console: Console) -> None:
+    """Handle 'scope' command and its sub-commands."""
+    global current_scope
     if sub_command == "set":
         scope = Prompt.ask("Enter the path to the scope directory")
-        scope_csv_to_working_memory(scope=scope)
+        set_scope(scope)
+        current_scope = scope
+        console.print(f"[green]Scope set to: {scope}[/green]")
     elif sub_command == "show":
-        # Logic to show current scope
-        pass
+        if current_scope:
+            console.print(f"[green]Current scope: {current_scope}[/green]")
+        else:
+            console.print("[yellow]No scope is currently set.[/yellow]")
     else:
         console.print("Invalid sub-command for 'scope'", style="red bold")
 
 def handle_run(sub_command: str, console: Console) -> None:
+    """Handle 'run' command and its sub-commands."""
+    global current_scope
     if sub_command == "analysis":
-        scope = Prompt.ask("Enter the path to the scope directory")
-        run(scope=scope)
+        if not current_scope:
+            console.print("[yellow]No scope is set. Please set a scope before running analysis.[/yellow]")
+            current_scope = Prompt.ask("Enter the path to the scope directory")
+            set_scope(current_scope)
+        run(console, current_scope)
     else:
         console.print("Invalid sub-command for 'run'", style="red bold")
 
 def show_help(console: Console) -> None:
+    """Display help information based on the COMMANDS dictionary."""
     console.print("[bold yellow]Available commands:[/bold yellow]")
     for command, details in COMMANDS.items():
         if isinstance(details, dict):
@@ -104,55 +130,42 @@ def show_help(console: Console) -> None:
         else:
             console.print(f"  {command}: {details}")
 
-
-
-
 def repl(console: Console) -> None:
     """
-    This function is the main entry point of the REPL (Read-Eval-Print Loop) application. It provides a command-line interface for users to interact with the CryptFlows framework.
+    Main REPL (Read-Eval-Print Loop) function for the CryptFlows framework.
+    
+    This function provides a command-line interface for users to interact with various
+    features of the CryptFlows framework, including project management, scope setting,
+    and analysis running.
 
     Args:
-        None
+        console (Console): Rich console object for formatted output.
 
     Returns:
         None
     """
-    
-    #console.print("[bold green]Cryptflows REPL[/bold green]")
+    console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
+    console.print("Type 'help' for a list of commands.")
 
     while True:
-        command: str = Prompt.ask("[bold blue]>>>[/bold blue]").strip().lower()
+        try:
+            input_string: str = Prompt.ask("[bold blue]>>>[/bold blue]")
+            main_command, sub_command = parse_command(input_string)
 
-        if command == "exit":
-            console.print("[bold red]Exiting REPL...[/bold red]")
-            break
-        elif command == "help":
-            console.print("[bold yellow]Available commands:[/bold yellow]")
-            console.print("  run - Run analysis on a scope")
-            console.print("  scope - Enter the path to the scope directory")
-            console.print("  projects - List all projects in the database")
-            console.print("  help - Show this help message")
-            console.print("  exit - Exit the REPL")
-        elif command == "run":
-            try:
-                if not scope_exists():
-                    console.print("[bold blue]No scope is set. Please set a scope before running analysis.[/bold blue]")
-                    scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
-                    scope_csv_to_working_memory(scope=scope)
-            except Exception as e:
-                console.print(f"An error occurred: {e}", style="bold red")
+            if main_command == "exit":
+                console.print("[bold red]Exiting REPL...[/bold red]")
+                break
+            elif main_command == "help":
+                show_help(console)
+            elif main_command == "projects":
+                handle_projects(sub_command, console)
+            elif main_command == "scope":
+                handle_scope(sub_command, console)
+            elif main_command == "run":
+                handle_run(sub_command, console)
+            else:
+                console.print("Invalid command. Type 'help' for a list of commands.", style="red bold")
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
+            console.print(f"[red]An error occurred: {e}[/red]")
 
-            
-            run(scope=scope)
-        
-        elif command == "scope":
-            scope: str = Prompt.ask("[bold blue]Enter the path to the scope directory[/bold blue]")
-            scope_csv_to_working_memory(scope=scope)
-
-        elif command == "projects":
-            console.print("All projects in the database", style="yellow bold")
-            
-            projects_in_storage: list = list_available_projects()
-            
-        else:
-            console.print("Invalid command. Please try again.", style="red bold")
