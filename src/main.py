@@ -123,7 +123,7 @@ def main() -> None:
     console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
     scope: str = Prompt.ask(
         "Enter the path to the scope directory",
-        type=click.Path(exists=True),
+        
     )
     
     
