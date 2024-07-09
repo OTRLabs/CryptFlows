@@ -121,33 +121,33 @@ class CryptFlowsREPL:
         self.console.print("[bold red]Exiting REPL...[/bold red]")
         raise SystemExit
 
-    def run(self):
-        """Run the REPL."""
-        self.console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
-        self.console.print("Type 'help' for a list of commands.")
+    def run(self) -> None:
+            """Run the REPL. This function takes no arguments and returns None."""
+            self.console.print("[bold green]Welcome to Cryptflows REPL[/bold green]")
+            self.console.print("Type 'help' for a list of commands.")
 
-        # Create a prompt session with auto-completion
-        command_completer = WordCompleter(list(self.commands.keys()))
-        session = PromptSession(completer=command_completer)
+            # Create a prompt session with auto-completion
+            command_completer: WordCompleter = WordCompleter(list(self.commands.keys()))
+            session: PromptSession = PromptSession(completer=command_completer)
 
-        while True:
-            try:
-                input_string = session.prompt(">>> ", style="bold blue")
-                main_command, sub_command = self.parse_command(input_string)
+            while True:
+                try:
+                    input_string: str = session.prompt(">>> ", style="bold blue")
+                    main_command, sub_command = self.parse_command(input_string)
 
-                if main_command in self.commands:
-                    if sub_command in self.commands[main_command] or '__main__' in self.commands[main_command]:
-                        command = self.commands[main_command].get(sub_command) or self.commands[main_command]['__main__']
-                        command['func']()
+                    if main_command in self.commands:
+                        if sub_command in self.commands[main_command] or '__main__' in self.commands[main_command]:
+                            command = self.commands[main_command].get(sub_command) or self.commands[main_command]['__main__']
+                            command['func']()
+                        else:
+                            self.console.print(f"Invalid sub-command for '{main_command}'. Type 'help' for available commands.", style="red bold")
                     else:
-                        self.console.print(f"Invalid sub-command for '{main_command}'. Type 'help' for available commands.", style="red bold")
-                else:
-                    self.console.print("Invalid command. Type 'help' for a list of commands.", style="red bold")
-            except SystemExit:
-                break
-            except Exception as e:
-                logging.error(f"An error occurred: {e}")
-                self.console.print(f"[red]An error occurred: {e}[/red]")
+                        self.console.print("Invalid command. Type 'help' for a list of commands.", style="red bold")
+                except SystemExit:
+                    break
+                except Exception as e:
+                    logging.error(f"An error occurred: {e}")
+                    self.console.print(f"[red]An error occurred: {e}[/red]")
 
 def init_repl(console: Console, db_session: Session):
     repl = CryptFlowsREPL(console, db_session)
