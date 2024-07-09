@@ -24,15 +24,21 @@ class ProjectUtils:
         pass
         
     def init_project_db_session(self, console: Console) -> sessionmaker:
+        # Set the path for the project database
         db_path = 'project_management.db'
+        
+        # Create an engine to connect to the database using duckdb
         engine = create_engine(f'duckdb:///{db_path}')
         
+        # Check if the database file exists
         if not os.path.exists(db_path):
             console.print(f'Creating database at {db_path}')
+            # Create the necessary tables in the database
             UUIDBase.metadata.create_all(engine)
         else:
             console.print(f'Reading from database at {db_path}')
             
+        # Create a sessionmaker bound to the engine
         session = sessionmaker(bind=engine)
         return session
 
