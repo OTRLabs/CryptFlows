@@ -3,7 +3,6 @@ from advanced_alchemy.base import UUIDBase
 from advanced_alchemy.filters import LimitOffset
 from advanced_alchemy.repository import SQLAlchemySyncRepository
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Mapped, sessionmaker
 
 from typing import TYPE_CHECKING
 from sqlalchemy import create_engine
