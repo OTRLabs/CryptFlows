@@ -121,14 +121,23 @@ def handle_run(sub_command: str, console: Console) -> None:
 
 def show_help(console: Console) -> None:
     """Display help information based on the COMMANDS dictionary."""
-    console.print("[bold yellow]Available commands:[/bold yellow]")
-    for command, details in COMMANDS.items():
-        if isinstance(details, dict):
-            console.print(f"  {command}:")
-            for sub_command, description in details.items():
-                console.print(f"    - {sub_command}: {description}")
+    table = Table(title="Available Commands")
+
+    #    Add columns to the table
+    table.add_column("Command Category", style="bold", no_wrap=True)
+    table.add_column("Sub-command", style="bold")
+    table.add_column("Description")
+
+    # Add rows to the table
+    for category, subcommands in COMMANDS.items():
+        if isinstance(subcommands, dict):
+            for subcommand, description in subcommands.items():
+                table.add_row(category, subcommand, description)
         else:
-            console.print(f"  {command}: {details}")
+            table.add_row(category, "-", subcommands)
+
+    # Print the table
+    console.print(table)
 
 def repl(console: Console) -> None:
     """
