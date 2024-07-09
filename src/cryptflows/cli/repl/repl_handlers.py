@@ -81,7 +81,7 @@ def handle_projects(sub_command: str, console: Console) -> None:
             console.print("[yellow]No projects found.[/yellow]")
     elif sub_command == "add":
         project_name: str = Prompt.ask("Enter project name")
-        ProjectUtils.create_project(console=console, name=project_name)
+        ProjectUtils.create_project(console=console, name=project_name, session=ProjectUtils.init_sqlite_project_db_service_session(console))
         current_scope = project_name
         console.print(f"[green]Current scope set to: {current_scope}[/green]")
         console.print(f"[green]Project '{project_name}' added successfully.[/green]")

@@ -50,7 +50,7 @@ class ProjectUtils:
             return session
 
     # Project management functions
-    def create_project(console: Console, name: str) -> Project:
+    def create_project(console: Console, name: str, session: Session) -> Project:
         """Create a project with strongly typed arguments and return type.
 
         Args:
@@ -62,7 +62,7 @@ class ProjectUtils:
         """
         console.print(f'Creating project!')
         
-        session: sessionmaker = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
+        #session: sessionmaker = ProjectUtils.init_project_db_session(self=ProjectUtils(), console=console)
         try:
             project: Project = Project(name=name)
             session.add(project)
