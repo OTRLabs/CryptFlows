@@ -21,3 +21,5 @@ class Config:
     RABBITMQ_PORT=os.getenv("RABBITMQ_PORT")
     RABBITMQ_USER=os.getenv("RABBITMQ_USER")
     RABBITMQ_PASSWORD=os.getenv("RABBITMQ_PASSWORD")
+
+    SQLITE_DB_PATH=os.getenv("SQLITE_DB_PATH", "cryptflows.db")
