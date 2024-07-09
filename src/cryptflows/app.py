@@ -37,7 +37,7 @@ def create_workflows_app(console: Console, scope: str) -> None:
     # Initialize the application services
     initialize_application_services()
 
-    print("[green]Creating workflows application...[/green]")
+    console.print("Creating workflows application...", style="bold green")
     
     # Example task and host
     example_task = {
