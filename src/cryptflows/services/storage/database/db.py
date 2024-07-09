@@ -15,6 +15,7 @@ class DatabaseUtils:
     def __init__(self, console: Console) -> None:
         console.print("Initializing database...", style="bold green")
 
+        
     def connect_to_database() -> Engine:
         """
         This function connects to the database and returns the database engine.
@@ -23,8 +24,9 @@ class DatabaseUtils:
             Engine: The SQLAlchemy database engine.
         """
         duck_db_engine: Engine = create_engine(
-            f"duckdb:///{Config.DUCKDB_PATH}",
+            f"sqlite:///{Config.SQLITE_DB_PATH}",
         )
         return duck_db_engine
 
         
+    def
