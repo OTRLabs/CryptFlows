@@ -127,7 +127,7 @@ def main() -> None:
     )
     
     
-    run(console=console,scope=scope)
+    repl(console=console,scope=scope)
     
     
     
