@@ -11,7 +11,7 @@ from rich.console import Console
 from rich.prompt import Prompt
 import csv
 from cryptflows.cli.repl.repl_utils import COMMANDS
-from cryptflows.cli.repl.repl_handlers import run, repl
+from cryptflows.cli.repl.repl_handlers import CryptFlowsREPL, init_repl
 from cryptflows.app import init_sqlite_project_db_service_session
 #from cryptflows.services.storage.projects.scope_utils import ask_user_for_scope
 
@@ -41,7 +41,7 @@ def main() -> None:
     console.print(f"Initialized at {datetime.now()}...")
     
     console.print(f"Launching REPL at {datetime.now()}...")
-    repl(console=console, session=session)
+    init_repl(console=console, session=session)
     
     
     

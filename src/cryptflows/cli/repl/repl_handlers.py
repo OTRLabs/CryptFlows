@@ -149,7 +149,6 @@ class CryptFlowsREPL:
                 logging.error(f"An error occurred: {e}")
                 self.console.print(f"[red]An error occurred: {e}[/red]")
 
-def init_repl(db_session: Session):
-    console = Console()
+def init_repl(console: Console, db_session: Session):
     repl = CryptFlowsREPL(console, db_session)
     repl.run()
