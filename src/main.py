@@ -14,7 +14,7 @@ import csv
 from cryptflows.cli.repl.repl_utils import COMMANDS
 from cryptflows.cli.repl.repl_handlers import run, repl
 from cryptflows.app import initialize_application_services
-
+#from cryptflows.services.storage.projects.scope_utils import ask_user_for_scope
 def main() -> None:
     """
     This is the main entry point of the CLI application. It takes a scope as input and runs the analysis
@@ -36,12 +36,10 @@ def main() -> None:
     # connect to all application services
 
 
-    scope: str = Prompt.ask(
-        "Enter the path to the scope directory",
-    )
+
     
     
-    repl(console=console,scope=scope)
+    repl(console=console)
     
     
     
