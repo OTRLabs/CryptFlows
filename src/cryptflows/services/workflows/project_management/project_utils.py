@@ -41,12 +41,16 @@ class ProjectUtils:
             raise e
 
     # Project management functions
-    def create_project(session: sessionmaker, name: str, description: str) -> Project:
+    def create_project(console: Console, session: sessionmaker, name: str) -> Project:
+        console.print(f'Creating project!')
         try:
-            project = Project(name=name, description=description)
+            project = Project(name=name)
             session.add(project)
             session.commit()
             session.refresh(project)
+            
+            console.print(f'Project created: {project}')
+
             return project
         except Exception as e:
             logging.error(f'Error creating project: {e}')
