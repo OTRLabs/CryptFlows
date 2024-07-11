@@ -16,8 +16,33 @@ if TYPE_CHECKING:
     from .user import User
     from ..user.user_role import UserRole
 
+
+
 class Project(UUIDAuditBase):
     __tablename__ = "project"
     name: Mapped[str] = mapped_column(String(length=255), nullable=False)
     #slug: Mapped[str] = mapped_column(SlugKey(length=50), nullable=False, index=True)
     description: Mapped[str] = mapped_column(String(length=255), nullable=True)
+    status: Mapped[ProjectStatus] = mapped_column(String(length=50), default=ProjectStatus.QUEUED)
+    teams: Mapped[list[Team]] = relationship(
+        #secondary=lambda: _project_team(),
+        back_populates="projects",
+        lazy="selectin",
+        cascade="all, delete",
+    )
+    users: Mapped[list[User]] = relationship(
+        #secondary=lambda: _project_user(),
+        back_populates="projects",
+        lazy="selectin",
+        cascade="all, delete",
+    )
+    roles: Mapped[list[UserRole]] = relationship(
+        #secondary=lambda: _project_role(),
+        back_populates="projects",
+        lazy="selectin",
+        cascade="all, delete",
+    )
+
+    def __repr__(self) -> str:
+        return f"<Project {self.name}>"
+    
