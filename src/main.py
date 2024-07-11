@@ -31,10 +31,10 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
     console.print(f"Initializing at {datetime.now()}...")
 
-    console.print(f"Base: {Base}")
+    #console.print(f"Base: {Base}")
     db_engine = create_engine(Config.SQLITE_DB_PATH)
     # connect to all application services
-    database_utils = DatabaseUtils(console=console, engine=db_engine)
+    database_utils = DatabaseUtils(console=console)
     ## check if the sqlite database exists
     
     session = database_utils.get_session()
