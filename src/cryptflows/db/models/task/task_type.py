@@ -10,10 +10,10 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 
 
 if TYPE_CHECKING:
-    from .project_role import ProjectRole
-    from .team import Team
-    from .user import User
-    from .user_role import UserRole
+    from ..project_role import ProjectRole
+    from ..base.team import Team
+    from ..base.user import User
+    from ..user_role import UserRole
 
 
 class TaskType(UUIDAuditBase):
@@ -26,4 +26,3 @@ class TaskType(UUIDAuditBase):
         back_populates="task_types", innerjoin=True, uselist=False, lazy="joined"
     )
     project_role_name: AssociationProxy[str] = association_proxy("project_role", "name")
-    

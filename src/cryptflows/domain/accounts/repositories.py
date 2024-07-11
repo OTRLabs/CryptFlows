@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsyncSlugRepository
 
-from cryptflows.db.models.role import Role
-from cryptflows.db.models.user import User
+from cryptflows.db.models.base.role import Role
+from cryptflows.db.models.base.user import User
 from cryptflows.db.models.user_role import UserRole
 
 class UserRepository(SQLAlchemyAsyncRepository[User]):

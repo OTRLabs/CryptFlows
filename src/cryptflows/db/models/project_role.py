@@ -11,10 +11,10 @@ from datetime import datetime, UTC
 
 
 if TYPE_CHECKING:
-    from .project import Project
-    from .user import User
+    from .base.project import Project
+    from .base.user import User
     from .user_role import UserRole
-    from .role import Role
+    from .base.role import Role
 
 class ProjectRole(UUIDAuditBase):
     __tablename__ = "project_role"
