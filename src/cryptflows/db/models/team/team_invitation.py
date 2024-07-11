@@ -10,8 +10,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .team_roles import TeamRoles
 
 if TYPE_CHECKING:
-    from .base.team import Team
-    from .base.user import User
+    from ..base.team import Team
+    from ..base.user import User
 
 
 class TeamInvitation(UUIDAuditBase):
