@@ -5,8 +5,8 @@ from uuid import UUID  # noqa: TCH003
 
 import msgspec
 
-from app.db.models.team_roles import TeamRoles
-from app.lib.schema import CamelizedBaseStruct
+from cryptflows.db.models.team.team_roles import TeamRoles
+from cryptflows.lib.schema import CamelizedBaseStruct
 
 __all__ = (
     "AccountLogin",
