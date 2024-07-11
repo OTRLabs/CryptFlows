@@ -9,6 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 if TYPE_CHECKING:
     from .team import Team
+    from .team_member import TeamMember
     from .user_role import UserRole
 
 
