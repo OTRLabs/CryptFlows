@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from .user import User
     from ..user.user_role import UserRole
     from ..base.project import Project
-    
+
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy import Column, ForeignKey, String
@@ -30,6 +30,11 @@ class Workflow(UUIDAuditBase):
     workflow_type: Mapped[str] = Column(String)
     project_id: Mapped[UUID] = Column(UUID, ForeignKey("project.id"))
     project: Mapped[Project | None] = relationship("Project", back_populates="workflows")
-    project_roles: Mapped[list[ProjectRole]] = relationship("ProjectRole", back_populates="workflow")
     team_id: Mapped[UUID | None] = Column(UUID, ForeignKey("team.id"))
 
+
+    __tablename__ = "workflow"
+
+    def __repr__(self) -> str:
+        return f"<Workflow {self.name}>"
+    
