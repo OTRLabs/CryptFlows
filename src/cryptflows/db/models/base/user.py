@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 if TYPE_CHECKING:
     from .team import Team
-    from ..team_member import TeamMember
+    from ..team.team_member import TeamMember
     from ..user.user_role import UserRole
 
 
@@ -24,6 +24,7 @@ class User(UUIDAuditBase):
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
     is_superuser: Mapped[bool] = mapped_column(default=False, nullable=False)
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
+    #is2faEnabled: Mapped[bool] = mapped_column(default=False, nullable=False)
     verified_at: Mapped[date] = mapped_column(nullable=True, default=None)
     joined_at: Mapped[date] = mapped_column(default=datetime.now)
     login_count: Mapped[int] = mapped_column(default=0)
