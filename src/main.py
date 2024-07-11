@@ -31,7 +31,6 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
     console.print(f"Initializing at {datetime.now()}...")
 
-    #Base = declarative_base
     console.print(f"Base: {Base}")
     db_engine = create_engine(Config.SQLITE_DB_PATH)
     # connect to all application services
