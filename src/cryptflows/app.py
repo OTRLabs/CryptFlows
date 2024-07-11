@@ -15,7 +15,7 @@ def create_app() -> Litestar:
 
     #from app.config import app as config
     #from app.config import constants
-    from app.config.base import get_settings
+    from cryptflows.config.base import get_settings
     #from app.domain.accounts import signals as account_signals
     #from app.domain.accounts.dependencies import provide_user
     #from app.domain.accounts.guards import auth
@@ -28,3 +28,5 @@ def create_app() -> Litestar:
     settings = get_settings()
 
     return Litestar(
+        
+    )
