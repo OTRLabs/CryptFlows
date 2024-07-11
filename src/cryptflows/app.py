@@ -28,5 +28,6 @@ def create_app() -> Litestar:
     settings = get_settings()
 
     return Litestar(
-        
+        #route_handlers=[],
+        #plugins=[],
     )
