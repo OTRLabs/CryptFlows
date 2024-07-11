@@ -6,11 +6,11 @@ from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy.orm import relationship
 from advanced_alchemy.base import UUIDAuditBase
 if TYPE_CHECKING:
-    from .project_role import ProjectRole
-    from .base.team import Team
-    from .base.user import User
-    from .user_role import UserRole
-    from .base.project import Project
+    from ..base.team import Team
+    from .user import User
+    from ..user.user_role import UserRole
+    from ..base.project import Project
+    
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy import Column, ForeignKey, String
