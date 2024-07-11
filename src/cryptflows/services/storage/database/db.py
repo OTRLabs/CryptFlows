@@ -7,7 +7,7 @@ from ....configs.config import Config
 from .models.models import Base, Project, Task
 
 class DatabaseUtils:
-    def __init__(self, console: Console) -> None:
+    def __init__(self, console: Console, engine: Engine) -> None:
         self.console = console
         self.console.print("Initializing database...", style="bold green")
         self.engine: Engine = self.connect_to_database()
