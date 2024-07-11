@@ -1,5 +1,7 @@
 
-
+from textual.app import App, ComposeResult
+from textual.containers import Horizontal, VerticalScroll
+from textual.widgets import Button, ContentSwitcher, DataTable, Markdown
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer
 from textual.containers import ScrollableContainer
@@ -11,6 +13,7 @@ class CryptFlowsApp(App):
 
     def compose(self) -> ComposeResult:
         yield Header()
+        
         yield Footer()
 
     def action_toggle_dark(self) -> None:
