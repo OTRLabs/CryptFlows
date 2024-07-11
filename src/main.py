@@ -17,6 +17,8 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from cryptflows.configs.config import Config
+from cryptflows.services.storage.database.models.models import Base
+
 
 def main() -> None:
     """
@@ -29,7 +31,7 @@ def main() -> None:
     console.print("CryptFlows", style="bold green")
     console.print(f"Initializing at {datetime.now()}...")
 
-    Base = declarative_base
+    #Base = declarative_base
     console.print(f"Base: {Base}")
     db_engine = create_engine(Config.SQLITE_DB_PATH)
     # connect to all application services
