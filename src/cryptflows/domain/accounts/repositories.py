@@ -4,7 +4,7 @@ from advanced_alchemy.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsy
 
 from cryptflows.db.models.base.role import Role
 from cryptflows.db.models.base.user import User
-from cryptflows.db.models.user_role import UserRole
+from cryptflows.db.models.user.user_role import UserRole
 
 class UserRepository(SQLAlchemyAsyncRepository[User]):
     """User SQLAlchemy Repository."""

@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from ..project.project_status import ProjectStatus
     from .team import Team
     from .user import User
-    from ..user_role import UserRole
+    from ..user.user_role import UserRole
 
 class Project(UUIDAuditBase):
     __tablename__ = "project"

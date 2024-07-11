@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from ..project.project_role import ProjectRole
     from ..base.team import Team
     from ..base.user import User
-    from ..user_role import UserRole
+    from ..user.user_role import UserRole
 
 
 class TaskType(UUIDAuditBase):
