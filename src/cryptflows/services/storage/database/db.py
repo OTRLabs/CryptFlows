@@ -12,7 +12,7 @@ class DatabaseUtils:
         console.print("Initializing database...", style="bold green")
         self.engine: Engine = self.connect_to_database()
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
-        self.init_db()
+        self.init_db(engine=self.engine)
 
     def connect_to_database(self) -> Engine:
         """
@@ -37,8 +37,8 @@ class DatabaseUtils:
         """
         Initialize the database by creating tables.
         """
-        Base.metadata.create_all(bind=self.engine)
-
+        data_base = Base.metadata.create_all(bind=self.engine)
+        return data_base
     def add_project(self, name: str, description: str, start_date: str, end_date: str, status: str, scope: str) -> None:
         """
         Add a new project to the database.
