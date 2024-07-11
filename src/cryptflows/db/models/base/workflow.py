@@ -25,15 +25,15 @@ from sqlalchemy import Column, ForeignKey, String
 
 
 class Workflow(UUIDAuditBase):
+    __tablename__ = "workflow"
     name: Mapped[str] = Column(String)
     description: Mapped[str | None] = mapped_column(String(length=500), nullable=True, default=None)
     workflow_type: Mapped[str] = Column(String)
     project_id: Mapped[UUID] = Column(UUID, ForeignKey("project.id"))
     project: Mapped[Project | None] = relationship("Project", back_populates="workflows")
-    team_id: Mapped[UUID | None] = Column(UUID, ForeignKey("team.id"))
 
 
-    __tablename__ = "workflow"
+    
 
     def __repr__(self) -> str:
         return f"<Workflow {self.name}>"
