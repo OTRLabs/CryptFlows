@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from ..task.task_type import TaskType
     from .user import User
     from ..user.user_role import UserRole
-    from ..workflow import Workflow
-
+    from .workflow import Workflow
+    from ..workflow.workflow_status import WorkflowStatus
 
 
 
@@ -40,3 +40,7 @@ class Task(UUIDAuditBase):
         String(length=50),
 
     )
+
+
+    def __repr__(self) -> str:
+        return f"<Task {self.name}>"
