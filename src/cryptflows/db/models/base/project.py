@@ -11,7 +11,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 if TYPE_CHECKING:
-    from ..project_status import ProjectStatus
+    from ..project.project_status import ProjectStatus
     from .team import Team
     from .user import User
     from ..user_role import UserRole

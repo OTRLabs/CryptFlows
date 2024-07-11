@@ -10,7 +10,7 @@ from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 
 
 if TYPE_CHECKING:
-    from ..project_role import ProjectRole
+    from ..project.project_role import ProjectRole
     from ..base.team import Team
     from ..base.user import User
     from ..user_role import UserRole
