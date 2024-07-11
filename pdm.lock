@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:17648dd16eb206a21a4e813c905de3c32118322305a76b8b4969c5aeae43e9ae"
+content_hash = "sha256:91e15c0c0e9a3bc701350aef4b4e0e636aeba7f8daeafdb12aef8725aaf0c430"
 
 [[package]]
 name = "advanced-alchemy"
@@ -1172,6 +1172,17 @@ dependencies = [
 files = [
     {file = "SQLAlchemy-Utils-0.41.2.tar.gz", hash = "sha256:bc599c8c3b3319e53ce6c5c3c471120bd325d0071fb6f38a10e924e3d07b9990"},
     {file = "SQLAlchemy_Utils-0.41.2-py3-none-any.whl", hash = "sha256:85cf3842da2bf060760f955f8467b87983fb2e30f1764fd0e24a48307dc8ec6e"},
+]
+
+[[package]]
+name = "structlog"
+version = "24.2.0"
+requires_python = ">=3.8"
+summary = "Structured Logging for Python"
+groups = ["default"]
+files = [
+    {file = "structlog-24.2.0-py3-none-any.whl", hash = "sha256:983bd49f70725c5e1e3867096c0c09665918936b3db27341b41d294283d7a48a"},
+    {file = "structlog-24.2.0.tar.gz", hash = "sha256:0e3fe74924a6d8857d3f612739efb94c72a7417d7c7c008d12276bca3b5bf13b"},
 ]
 
 [[package]]
