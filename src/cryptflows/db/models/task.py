@@ -36,7 +36,7 @@ class Task(UUIDAuditBase):
         #nullable=False,
         index=True,
     )
-    type: Mapped[TaskType] = mapped_column(
+    task_type: Mapped[TaskType] = mapped_column(
         String(length=50),
 
     )
