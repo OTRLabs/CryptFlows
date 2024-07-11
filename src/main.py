@@ -18,39 +18,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from cryptflows.configs.config import Config
 from cryptflows.services.storage.database.models.models import Base
+from cryptflows.tui.terminal_user_interface import CryptFlowsApp
 
 
-def main() -> None:
-    """
-    This is the main entry point of the CLI application. 
-
-    """
-    ## init the application's rich console
-    console: Console = Console(stderr=True, theme=Theme({"repl": "bold green"}))
-
-    console.print("CryptFlows", style="bold green")
-    console.print(f"Initializing at {datetime.now()}...")
-
-    #console.print(f"Base: {Base}")
-    db_engine = create_engine(Config.SQLITE_DB_PATH)
-    # connect to all application services
-    database_utils = DatabaseUtils(console=console)
-    ## check if the sqlite database exists
-    
-    session = database_utils.get_session()
-
-    console.print(f"Connected to database at {datetime.now()}...")
-    console.print(f"Initialized at {datetime.now()}...")
-    
-
-    # Example: Fetching projects
-    #projects = database_utils.get_projects()
-    #console.print(f"Projects: {projects}")
-
-    
-    console.print(f"Launching REPL at {datetime.now()}...")
-
-    init_repl(console=console, db_session=session)
-    
 if __name__ == "__main__":
-    main()
+    app = CryptFlowsApp()
+    app.run()
