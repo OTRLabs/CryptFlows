@@ -30,3 +30,13 @@ class Task(UUIDAuditBase):
     description: Mapped[str | None] = mapped_column(String(2048), nullable=True)
     project_id: Mapped[UUID] = mapped_column(ForeignKey("project.id", ondelete="CASCADE"), nullable=False)
     workflow_id: Mapped[UUID] = mapped_column(ForeignKey("workflow.id", ondelete="CASCADE"), nullable=False)
+    status: Mapped[TaskStatus] = mapped_column(
+        String(length=50),
+        default=TaskStatus.QUEUED,
+        #nullable=False,
+        index=True,
+    )
+    type: Mapped[TaskType] = mapped_column(
+        String(length=50),
+
+    )
