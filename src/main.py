@@ -16,7 +16,7 @@ import sqlite3
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
+from cryptflows.configs.config import Config
 
 def main() -> None:
     """
@@ -31,8 +31,9 @@ def main() -> None:
 
     Base = declarative_base
     console.print(f"Base: {Base}")
+    db_engine = create_engine(Config.SQLITE_DB_PATH)
     # connect to all application services
-    database_utils = DatabaseUtils(console=console)
+    database_utils = DatabaseUtils(console=console, engine=db_engine)
     ## check if the sqlite database exists
     
     session = database_utils.get_session()
