@@ -52,7 +52,7 @@ def create_workflows_app(console: Console, scope: str) -> None:
     :param scope: A string indicating the scope
     :return: None
     """
-    print("[green]Initializing application...[/green]")
+    console.print("[green]Initializing application...[/green]")
     
     # Configure logging
     console.print("Configuring logging...", style="bold green")
