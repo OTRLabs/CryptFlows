@@ -26,3 +26,4 @@ class TaskType(UUIDAuditBase):
         back_populates="task_types", innerjoin=True, uselist=False, lazy="joined"
     )
     project_role_name: AssociationProxy[str] = association_proxy("project_role", "name")
+    
