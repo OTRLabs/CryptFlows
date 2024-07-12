@@ -14,16 +14,7 @@ if TYPE_CHECKING:
     from .team import Team
     from ..team.team_member import TeamMember
 
-#from import Base
-from sqlalchemy import Table, Column, ForeignKey
 
-def _team_proxy():
-    return Table(
-        "proxy_team",
-        Base.metadata,
-        Column("proxy_id", ForeignKey("proxy.id"), primary_key=True),
-        Column("team_id", ForeignKey("team.id"), primary_key=True),
-    )
 
 class Proxy(UUIDAuditBase):
 
