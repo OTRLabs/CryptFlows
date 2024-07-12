@@ -12,8 +12,8 @@ from ...database import DefaultBase
 
 if TYPE_CHECKING:
     from .tag import Tag
-    from ..team.team_invitation import TeamInvitation
-    from ..team.team_member import TeamMember
+    from .team_invitation import TeamInvitation
+    from .team_member import TeamMember
 
 
 class Team(DefaultBase):
