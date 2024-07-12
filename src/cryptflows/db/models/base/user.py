@@ -3,10 +3,10 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import TYPE_CHECKING
 
-from advanced_alchemy.base import UUIDAuditBase
+#from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from ...database import DefaultBase
 if TYPE_CHECKING:
     from .team import Team
     from .team_member import TeamMember
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 
-class User(UUIDAuditBase):
+class User(DefaultBase):
     __tablename__ = "user_account"
 
     email: Mapped[str] = mapped_column(unique=True, index=True, nullable=False)
