@@ -1,18 +1,17 @@
-from __future__ import annotations
+# db/database.py
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
+from config.base import DATABASES
 
-from typing import TYPE_CHECKING
+# Create engines
+default_engine = create_engine(DATABASES["default"])
+knowledge_base_engine = create_engine(DATABASES["knowledge_base"])
 
-from sqlalchemy import select
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+# Create session makers
+DefaultSession = sessionmaker(bind=default_engine)
+KnowledgeBaseSession = sessionmaker(bind=knowledge_base_engine)
 
-from litestar import Litestar, post
-from litestar.contrib.sqlalchemy.plugins import SQLAlchemyAsyncConfig, SQLAlchemyPlugin
-
-if TYPE_CHECKING:
-
-    from sqlalchemy.ext.asyncio import AsyncSession
-
-
-class Base(DeclarativeBase):
-    pass
+# Base classes
+DefaultBase = declarative_base()
+KnowledgeBaseBase = declarative_base()
