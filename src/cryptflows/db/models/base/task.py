@@ -10,6 +10,7 @@ from sqlalchemy_utils.types import ChoiceType
 from sqlalchemy_utils.types.encrypted.encrypted_type import SlugKey
 from sqlalchemy_utils.types.encrypted.encrypted_type import EncryptedType
 
+from ...database import DefaultBase
 
 
 if TYPE_CHECKING:
@@ -23,7 +24,7 @@ if TYPE_CHECKING:
 
 
 
-class Task(UUIDAuditBase):
+class Task(DefaultBase):
     __tablename__ = "task"
 
     name: Mapped[str] = mapped_column(String(255), nullable=False)
