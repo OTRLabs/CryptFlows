@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from uuid import UUID  # noqa: TCH003
 
-from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -14,8 +13,9 @@ if TYPE_CHECKING:
     from .team import Team
     from .user import User
 
+from ...database import DefaultBase
 
-class TeamMember(UUIDAuditBase):
+class TeamMember(DefaultBase):
     """Team Membership."""
 
     __tablename__ = "team_member"
