@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from ..task.task_status import TaskStatus
     from ..task.task_type import TaskType
     from .user import User
-    from ..user.user_role import UserRole
+    from .user_role import UserRole
     from .workflow import Workflow
     from ..workflow.workflow_status import WorkflowStatus
 

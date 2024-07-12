@@ -6,7 +6,7 @@ from advanced_alchemy.base import SlugKey, UUIDAuditBase
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 if TYPE_CHECKING:
-    from ..user.user_role import UserRole
+    from .user_role import UserRole
 
 
 class Role(UUIDAuditBase, SlugKey):

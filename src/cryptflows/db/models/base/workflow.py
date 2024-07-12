@@ -8,7 +8,7 @@ from advanced_alchemy.base import UUIDAuditBase
 if TYPE_CHECKING:
     from ..base.team import Team
     from .user import User
-    from ..user.user_role import UserRole
+    from .user_role import UserRole
     from ..base.project import Project
 
 from sqlalchemy.orm import Mapped

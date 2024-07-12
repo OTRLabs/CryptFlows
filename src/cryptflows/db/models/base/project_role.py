@@ -13,7 +13,7 @@ from datetime import datetime, UTC
 if TYPE_CHECKING:
     from .project import Project
     from .user import User
-    from ..user.user_role import UserRole
+    from .user_role import UserRole
     from .role import Role
 
 class ProjectRole(UUIDAuditBase):

@@ -16,7 +16,7 @@ from litestar.exceptions import PermissionDeniedException
 from cryptflows.config import constants
 from cryptflows.db.models.base.role import Role
 from cryptflows.db.models.base.user import User
-from cryptflows.db.models.user.user_role import UserRole
+from cryptflows.db.models.base.user_role import UserRole
 from cryptflows.libr import crypt
 
 from .repositories import RoleRepository, UserRepository, UserRoleRepository
