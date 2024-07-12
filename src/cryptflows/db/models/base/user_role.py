@@ -8,13 +8,13 @@ from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from ...database import DefaultBase
 if TYPE_CHECKING:
     from .role import Role
     from .user import User
 
 
-class UserRole(UUIDAuditBase):
+class UserRole(DefaultBase):
     """User Role."""
 
     __tablename__ = "user_account_role"
