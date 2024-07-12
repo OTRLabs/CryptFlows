@@ -8,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..team.team_tag import team_tag
 
+from ...database import DefaultBase
 
 if TYPE_CHECKING:
     from .tag import Tag
@@ -15,7 +16,7 @@ if TYPE_CHECKING:
     from ..team.team_member import TeamMember
 
 
-class Team(UUIDAuditBase, SlugKey):
+class Team(DefaultBase):
     """A group of users with common permissions.
     Users can create and invite users to a team.
     """
