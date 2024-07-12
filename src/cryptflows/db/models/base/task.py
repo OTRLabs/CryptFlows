@@ -14,12 +14,12 @@ from sqlalchemy_utils.types.encrypted.encrypted_type import EncryptedType
 
 if TYPE_CHECKING:
     from .project import Project
-    from ..task.task_status import TaskStatus
-    from ..task.task_type import TaskType
+    from .task_status import TaskStatus
+    from .task_type import TaskType
     from .user import User
     from .user_role import UserRole
     from .workflow import Workflow
-    from ..workflow.workflow_status import WorkflowStatus
+    from .workflow_status import WorkflowStatus
 
 
 
