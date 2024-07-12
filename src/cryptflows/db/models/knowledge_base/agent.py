@@ -7,7 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from advanced_alchemy.base import UUIDAuditBase
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from ...database import KnowledgeBaseBase
+class Agent(KnowledgeBaseBase):
+    name: Mapped[str] = mapped_column(index=True)
+    description: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    url: Mapped[str | None] = mapped_column(String(500), nullable=True) 
 
-
-class Agent(UUIDAuditBase):
-    name
+    def __repr__(self) -> str:
+        return f"<Agent {self.name}>"
