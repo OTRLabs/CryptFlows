@@ -24,3 +24,4 @@ class Event(KnowledgeBaseBase):
 
     def __repr__(self):
         return f"Event(id={self.id}, name={self.name})"
+    
