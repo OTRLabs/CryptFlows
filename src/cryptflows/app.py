@@ -25,7 +25,7 @@ def create_app() -> Litestar:
 
     #dependencies = {constants.USER_DEPENDENCY_KEY: Provide(provide_user)}
     #dependencies.update(create_collection_dependencies())
-    settings = get_settings()
+    CurrentSettings = get_settings()
 
     return Litestar(
         #route_handlers=[],

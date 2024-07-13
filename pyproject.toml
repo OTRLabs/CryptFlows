@@ -31,6 +31,8 @@ dependencies = [
     "sqlalchemy-utils>=0.41.2",
     "structlog>=24.2.0",
     "passlib>=1.7.4",
+    "litestar-vite>=0.1.22",
+    "litestar-saq>=0.1.21",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
