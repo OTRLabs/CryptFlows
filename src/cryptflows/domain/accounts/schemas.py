@@ -5,7 +5,7 @@ from uuid import UUID  # noqa: TCH003
 
 import msgspec
 
-from cryptflows.db.models.team.team_roles import TeamRoles
+from cryptflows.db.models.base.team_roles import TeamRoles
 from cryptflows.libr.schema import CamelizedBaseStruct
 
 __all__ = (
