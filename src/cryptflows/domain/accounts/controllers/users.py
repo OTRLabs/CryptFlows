@@ -8,11 +8,11 @@ from litestar import Controller, delete, get, patch, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from app.domain.accounts import urls
-from app.domain.accounts.dependencies import provide_users_service
-from app.domain.accounts.guards import requires_superuser
-from app.domain.accounts.schemas import User, UserCreate, UserUpdate
-from app.domain.accounts.services import UserService
+from .. import urls
+from ..dependencies import provide_users_service
+from ..guards import requires_superuser
+from ..schemas import User, UserCreate, UserUpdate
+from ..services import UserService
 
 if TYPE_CHECKING:
     from uuid import UUID
